@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>SharifCTF8_ElGamat</title>
+  <meta property="og:title" content="SharifCTF8_ElGamat" />
+  <meta name="twitter:title" content="SharifCTF8_ElGamat" />
+  <meta name="description" content="Sharif CTF 8 - ElGamat WriteUp Challenge details    Event Challenge Category Points     Sharif CTF 8 ElGamat Crypto 200    Description  ElGamal over Matrices: algebra-focused crypto challenge
+you can find full description in ElGamat.pdf
+ Attachments  Matrices.txt
+ Solution This problem appears to be similar to the discrete logarithm problem (see Discrete logarithm), but instead of the generator g we a have a matrix \(G\), So we need to find \(x\) such that \(G^x = H\) (both \(G\) and \(H\) are \(5\times5\) Matrices).">
+  <meta property="og:description" content="Sharif CTF 8 - ElGamat WriteUp Challenge details    Event Challenge Category Points     Sharif CTF 8 ElGamat Crypto 200    Description  ElGamal over Matrices: algebra-focused crypto challenge
+you can find full description in ElGamat.pdf
+ Attachments  Matrices.txt
+ Solution This problem appears to be similar to the discrete logarithm problem (see Discrete logarithm), but instead of the generator g we a have a matrix \(G\), So we need to find \(x\) such that \(G^x = H\) (both \(G\) and \(H\) are \(5\times5\) Matrices).">
+  <meta name="twitter:description" content="Sharif CTF 8 - ElGamat WriteUp Challenge details    Event Challenge Category Points     Sharif CTF 8 ElGamat Crypto 200    Description  ElGamal over Matrices: algebra-focused crypto challenge
+you can …">
+  <meta name="author" content="philomath213"/>
+  <link href='https://philomath213.github.io/img/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://philomath213.github.io/img/avatar-icon.png" />
+  <meta name="twitter:image" content="https://philomath213.github.io/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@philomath213" />
+  <meta name="twitter:creator" content="@philomath213" />
+  <meta property="og:url" content="https://philomath213.github.io/post/sharifctf8_elgamat/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="philomath213" />
+
+  <meta name="generator" content="Hugo 0.51" />
+  <link rel="canonical" href="https://philomath213.github.io/post/sharifctf8_elgamat/" />
+  <link rel="alternate" href="https://philomath213.github.io/index.xml" type="application/rss+xml" title="philomath213">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://philomath213.github.io/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://philomath213.github.io/css/highlight.min.css" /><link rel="stylesheet" href="https://philomath213.github.io/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://philomath213.github.io">philomath213</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="philomath213" href="https://philomath213.github.io">
+            <img class="avatar-img" src="https://philomath213.github.io/img/avatar-icon.png" alt="philomath213" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              
+                <h1>SharifCTF8_ElGamat</h1>
+              
+              
+              
+              
+                <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on September 26, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 3 minutes (437 words)
+  
+  
+</span>
+
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+<h1 id="sharif-ctf-8-elgamat-writeup">Sharif CTF 8 - ElGamat WriteUp</h1>
+
+<h2 id="challenge-details">Challenge details</h2>
+
+<table>
+<thead>
+<tr>
+<th align="left">Event</th>
+<th align="left">Challenge</th>
+<th align="left">Category</th>
+<th align="center">Points</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">Sharif CTF 8</td>
+<td align="left">ElGamat</td>
+<td align="left">Crypto</td>
+<td align="center">200</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="description">Description</h3>
+
+<blockquote>
+<p>ElGamal over Matrices: algebra-focused crypto challenge</p>
+
+<p>you can find full description in <a href="ElGamat.pdf">ElGamat.pdf</a></p>
+</blockquote>
+
+<h3 id="attachments">Attachments</h3>
+
+<blockquote>
+<p><a href="Matrices.txt">Matrices.txt</a></p>
+</blockquote>
+
+<h2 id="solution">Solution</h2>
+
+<p>This problem appears to be similar to the discrete logarithm problem (see <a href="https://en.wikipedia.org/wiki/Discrete_logarithm">Discrete logarithm</a>), but instead of the generator g we a have a matrix \(G\), So we need to find \(x\) such that \(G^x = H\) (both \(G\) and \(H\) are \(5\times5\) Matrices).</p>
+
+<p>Matrices =&gt; Linear Algebra: this challenge requires some fundamentals in linear algebra.</p>
+
+<p>At the beginning I tried to diagonalize the matrix \(G\) and \(H\) in order to transform the problem to a discrete logarithm problem, but it will stay hard to solve since \(p-1\) is not a product of small primes which in this case Pohlig–Hellman algorithm is not an efficient method for computing the discrete logarithms.</p>
+
+<p>After doing some googling I figure out that in order to make this problem easy to solve we need to put both Matrices \(G\) and \(H\) in Jordan normal form (see <a href="https://en.wikipedia.org/wiki/Jordan_normal_form">Jordan normal form</a>)</p>
+
+<p>A Jordan matrix has each non-zero off-diagonal entry equal to \(1\), immediately above the main diagonal.</p>
+
+<p>for A a Jordan block as \(2\times2\) matrix, if we have a repeated eigenvalues:</p>
+
+<p>$$
+A = \begin{pmatrix} \lambda &amp; 1 \\ 0 &amp; \lambda \end{pmatrix}
+$$
+for \(B = A^x\):
+$$
+B = \begin{pmatrix} \lambda^x &amp; x\lambda^{x-1} \\ 0 &amp; \lambda^x \end{pmatrix}
+$$</p>
+
+<p>$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$</p>
+
+<p>therefore in this case:
+$$
+B<em>{12} = xB</em>{11}A<em>{11}^{-1} \iff x = A</em>{11}B<em>{12}B</em>{11}^{-1}
+$$</p>
+
+<p>Now we need to apply this solution to ElGamat problem</p>
+
+<p>In our case \(G[3][3]\) to \(G[4][4]\) is a Jordan block with repeated eigenvalues, and all arithmetic operations are in Quotient Ring \(Z/Z_p\)</p>
+
+<p>this is my code in sage (<a href="ElGamat.sage">ElGamat.sage</a>):</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1461501637330902918203684832716283019655932542983</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="p">[</span><span class="mi">1287397632974625907369332145667695136576732725719</span><span class="p">,</span>  <span class="mi">999149001044306271168727399637009399486427921379</span><span class="p">,</span>   <span class="mi">1046504160269652701583906344218556291030141088947</span><span class="p">,</span>  <span class="mi">724446625683754938181565321149725788430461092168</span><span class="p">,</span>    <span class="mi">1071845980147173642753960259602135592110139561915</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">947603660931904341080240982051313712707367037453</span><span class="p">,</span>   <span class="mi">312289846563741934103580532543082761760226637905</span><span class="p">,</span>   <span class="mi">494739786803547247505263837170488583876166831850</span><span class="p">,</span>   <span class="mi">680540462980071181450018491798299105995449257198</span><span class="p">,</span>    <span class="mi">2602258415762368797405060707505977243346704576</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">996213673531855992829525358578006610606634622631</span><span class="p">,</span>   <span class="mi">1025711294257038288640877971869685565227647136954</span><span class="p">,</span>  <span class="mi">1432432135773706484846126533752827108541355741973</span><span class="p">,</span>  <span class="mi">1238541870126055576875033883691918425137600727481</span><span class="p">,</span>   <span class="mi">1130938956963588695293783764965618873887596017827</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">1320933266015680090206505704792362493057963931979</span><span class="p">,</span>  <span class="mi">1151746112645644166669332171392580649376526147475</span><span class="p">,</span>  <span class="mi">117512451110908867093773368598681106589771485221</span><span class="p">,</span>   <span class="mi">78071463743800894350883457304401524272336187149</span><span class="p">,</span>     <span class="mi">350437511649326676405126284689545814008237687775</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">438339253001275654203062260777687750937184662400</span><span class="p">,</span>   <span class="mi">372483950165136927369598298270629892810999203086</span><span class="p">,</span>   <span class="mi">859008773869616460027135965589262417694174453098</span><span class="p">,</span>   <span class="mi">1174526536643808668299968641952541506024584582818</span><span class="p">,</span>   <span class="mi">13201859260259503932772826643483081858286638179</span><span class="p">]</span>
+    <span class="p">]</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="p">[</span>
+     <span class="p">[</span><span class="mi">903022231855038558383593109888227525558007552960</span><span class="p">,</span>   <span class="mi">565977275270298825053282757799743346899236483368</span><span class="p">,</span>   <span class="mi">989303675765663596792169321947495382568831693037</span><span class="p">,</span>   <span class="mi">601579288654704389384765634776493921679315260303</span><span class="p">,</span>    <span class="mi">913791750749394879333717884106841876340654737006</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">1159121456278955861257379214176694847802842944213</span><span class="p">,</span>  <span class="mi">55304385436577133507085707981392660143782780650</span><span class="p">,</span>    <span class="mi">559867756424853909301288957105188829240808301823</span><span class="p">,</span>   <span class="mi">1230859641388132364539374469026906952870988170695</span><span class="p">,</span>   <span class="mi">1423995124592695628047882256427827379994877406997</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">1125565199147204322161069021173152827232960621114</span><span class="p">,</span>  <span class="mi">1373772036013472137002755957284397215018630262515</span><span class="p">,</span>  <span class="mi">640623873603434273377865546046279663852895430999</span><span class="p">,</span>   <span class="mi">1056809237992218798189986002766547616222871640976</span><span class="p">,</span>   <span class="mi">1426649441470162608512662468308504390861950649943</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">303729376872199895471546635639837180361513146712</span><span class="p">,</span>   <span class="mi">1163767872227950278851006729914569662442255257700</span><span class="p">,</span>  <span class="mi">1320342731346163804219021270875175061467772367004</span><span class="p">,</span>  <span class="mi">433001013681018647747911760920686992297849343282</span><span class="p">,</span>    <span class="mi">1149024280460224794070159244078925721991430685838</span><span class="p">],</span>
+     <span class="p">[</span><span class="mi">23661702916810298505759145354543089608241235601</span><span class="p">,</span>    <span class="mi">1048655828654821525617176122368805879408325508567</span><span class="p">,</span>  <span class="mi">587846047820504813842423941849757078103027466928</span><span class="p">,</span>   <span class="mi">1338365929525105225695097114139069216753339875455</span><span class="p">,</span>   <span class="mi">1425543850003062038868121400064269552725872690214</span><span class="p">]</span>
+    <span class="p">]</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">IntegerModRing</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">MatrixSpace</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">M</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+
+<span class="n">g</span><span class="p">,</span> <span class="n">p_mat</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">jordan_form</span><span class="p">(</span><span class="n">transformation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s1">&#39;[+] jordan normal for G:&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">i</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">p_mat</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">p_mat</span>
+<span class="k">print</span> <span class="s1">&#39;[+] jordan normal for H:&#39;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">h</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">i</span>
+
+<span class="n">a11</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">b11</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">b12</span> <span class="o">=</span> <span class="n">h</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">a11</span><span class="o">*</span><span class="n">b12</span><span class="o">/</span><span class="n">b11</span>
+<span class="k">assert</span> <span class="n">b12</span> <span class="o">==</span> <span class="n">x</span><span class="o">*</span><span class="n">a11</span><span class="o">^</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s1">&#39;[+] solution:&#39;</span><span class="p">,</span> <span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">flag_gen</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s1">&#39;SharifCTF{</span><span class="si">%s</span><span class="s1">}&#39;</span> <span class="o">%</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="s1">&#39;[+] FLAG:&#39;</span><span class="p">,</span> <span class="n">flag_gen</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></code></pre></div>
+
+        
+
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:bilalphilomath@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.facebook.com/philomath213" title="Facebook">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/philomath213" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/philomath213" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/philomath213" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://telegram.me/philomath213" title="Telegram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-telegram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              philomath213
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://philomath213.github.io/js/main.js"></script>
+<script src="https://philomath213.github.io/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="https://philomath213.github.io/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+  </body>
+</html>
+
