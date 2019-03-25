@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</loc>
+    <lastmod>2019-03-25T11:59:39+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://philomath213.github.io/post/securinets-ctf-quals-2019-stone-mining/</loc>
     <lastmod>2019-03-24T19:00:46+01:00</lastmod>
   </url>
@@ -30,7 +35,7 @@
   
   <url>
     <loc>https://philomath213.github.io/post/</loc>
-    <lastmod>2019-03-24T19:00:46+01:00</lastmod>
+    <lastmod>2019-03-25T11:59:39+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -41,7 +46,7 @@
   
   <url>
     <loc>https://philomath213.github.io/</loc>
-    <lastmod>2019-03-24T19:00:46+01:00</lastmod>
+    <lastmod>2019-03-25T11:59:39+01:00</lastmod>
     <priority>0</priority>
   </url>
   

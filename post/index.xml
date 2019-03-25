@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>bilalphilomath@gmail.com (philomath213)</managingEditor>
     <webMaster>bilalphilomath@gmail.com (philomath213)</webMaster>
-    <lastBuildDate>Sun, 24 Mar 2019 19:00:46 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 25 Mar 2019 11:59:39 +0100</lastBuildDate>
     
 	<atom:link href="https://philomath213.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Securinets CTF Quals 2019 Special Revenge</title>
+      <link>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</link>
+      <pubDate>Mon, 25 Mar 2019 11:59:39 +0100</pubDate>
+      <author>bilalphilomath@gmail.com (philomath213)</author>
+      <guid>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</guid>
+      <description>Securinets CTF Quals 2019 - Special Revenge WriteUp Challenge details    Event Challenge Category Points Solves     Securinets CTF Quals 2019 Special Revenge PWN 1000 5    Description  After the disappointment of last year challenge &amp;ldquo;special&amp;rdquo;, I came this year with a mystery revenge.
+ssh special@51.254.114.246
+password : b8f07e1000c719c6a7febde4ec0ab24d
+Author : Anis_Boss
+ Another jail escape challenge, we were provided with ssh login (username special).</description>
+    </item>
     
     <item>
       <title>Securinets CTF Quals 2019 Stone Mining</title>
