@@ -59,12 +59,17 @@
   </url>
   
   <url>
-    <loc>https://philomath213.github.io/talk/docker-from-a-to-b/</loc>
-    <lastmod>2018-12-01T10:30:00+00:00</lastmod>
+    <loc>https://philomath213.github.io/talk/</loc>
+    <lastmod>2018-12-15T10:30:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://philomath213.github.io/talk/</loc>
+    <loc>https://philomath213.github.io/talk/sql-injection/</loc>
+    <lastmod>2018-12-15T10:30:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://philomath213.github.io/talk/docker-from-a-to-b/</loc>
     <lastmod>2018-12-01T10:30:00+00:00</lastmod>
   </url>
   
