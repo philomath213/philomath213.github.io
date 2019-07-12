@@ -3,22 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://philomath213.github.io/talk/example/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://philomath213.github.io/talk/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://philomath213.github.io/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://philomath213.github.io/tags/artificial-intelligence/</loc>
     <lastmod>2019-07-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -54,6 +38,12 @@
   </url>
   
   <url>
+    <loc>https://philomath213.github.io/</loc>
+    <lastmod>2019-07-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://philomath213.github.io/post/</loc>
     <lastmod>2019-03-25T11:59:39+01:00</lastmod>
   </url>
@@ -69,14 +59,13 @@
   </url>
   
   <url>
-    <loc>https://philomath213.github.io/slides/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://philomath213.github.io/talk/docker-from-a-to-b/</loc>
+    <lastmod>2018-12-01T10:30:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://philomath213.github.io/slides/example/</loc>
-    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    <loc>https://philomath213.github.io/talk/</loc>
+    <lastmod>2018-12-01T10:30:00+00:00</lastmod>
   </url>
   
   <url>
