@@ -1,39 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Presentations on philomath213</title>
-    <link>https://philomath213.github.io/talk/</link>
-    <description>Recent content in Presentations on philomath213</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 15 Dec 2018 10:30:00 +0000</lastBuildDate>
-    
-	    <atom:link href="https://philomath213.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>SQL INJECTION</title>
-      <link>https://philomath213.github.io/talk/sql-injection/</link>
-      <pubDate>Sat, 15 Dec 2018 10:30:00 +0000</pubDate>
-      
-      <guid>https://philomath213.github.io/talk/sql-injection/</guid>
-      <description>&lt;p&gt;
-  &lt;iframe src=&#34;https://docs.google.com/presentation/d/e/2PACX-1vQdqBSE1NW9kI7nkhegLNQYm3kkztmeZgbuo8Jvl6p_bLyS8qwqRPxExG7tpaK_B4dIsbu74zfe1wV0/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;720&#34; height=&#34;569&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
-&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Docker From A to B</title>
-      <link>https://philomath213.github.io/talk/docker-from-a-to-b/</link>
-      <pubDate>Sat, 01 Dec 2018 10:30:00 +0000</pubDate>
-      
-      <guid>https://philomath213.github.io/talk/docker-from-a-to-b/</guid>
-      <description>&lt;p&gt;
-  &lt;iframe src=&#34;https://docs.google.com/presentation/d/e/2PACX-1vST1UAEDwO4EYsfjbuluPTDjYgac6vQmePa5Ysth4Y3TUYX-B1quj_0yKb8S4g1O0rEXBQZbdsaO0o1/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;720&#34; height=&#34;569&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
-&lt;/p&gt;
-</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Presentations on philomath213</title><link>https://philomath213.github.io/talk/</link><description>Recent content in Presentations on philomath213</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 15 Dec 2018 10:30:00 +0000</lastBuildDate><atom:link href="https://philomath213.github.io/talk/index.xml" rel="self" type="application/rss+xml"/><item><title>SQL INJECTION</title><link>https://philomath213.github.io/talk/sql-injection/</link><pubDate>Sat, 15 Dec 2018 10:30:00 +0000</pubDate><guid>https://philomath213.github.io/talk/sql-injection/</guid><description>&lt;p&gt;
+&lt;iframe src=&#34;https://docs.google.com/presentation/d/e/2PACX-1vQdqBSE1NW9kI7nkhegLNQYm3kkztmeZgbuo8Jvl6p_bLyS8qwqRPxExG7tpaK_B4dIsbu74zfe1wV0/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;720&#34; height=&#34;569&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
+&lt;/p&gt;</description></item><item><title>Docker From A to B</title><link>https://philomath213.github.io/talk/docker-from-a-to-b/</link><pubDate>Sat, 01 Dec 2018 10:30:00 +0000</pubDate><guid>https://philomath213.github.io/talk/docker-from-a-to-b/</guid><description>&lt;p&gt;
+&lt;iframe src=&#34;https://docs.google.com/presentation/d/e/2PACX-1vST1UAEDwO4EYsfjbuluPTDjYgac6vQmePa5Ysth4Y3TUYX-B1quj_0yKb8S4g1O0rEXBQZbdsaO0o1/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;720&#34; height=&#34;569&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
+&lt;/p&gt;</description></item></channel></rss>
