@@ -2,16 +2,16 @@
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th align="center">Event&lt;/th>
-&lt;th align="center">Challenge&lt;/th>
-&lt;th align="center">Category&lt;/th>
+&lt;th style="text-align:center">Event&lt;/th>
+&lt;th style="text-align:center">Challenge&lt;/th>
+&lt;th style="text-align:center">Category&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td align="center">Angstrom CTF 2020&lt;/td>
-&lt;td align="center">bookface&lt;/td>
-&lt;td align="center">PWN&lt;/td>
+&lt;td style="text-align:center">Angstrom CTF 2020&lt;/td>
+&lt;td style="text-align:center">bookface&lt;/td>
+&lt;td style="text-align:center">PWN&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -28,34 +28,34 @@
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th align="left">File&lt;/th>
-&lt;th align="left">Description&lt;/th>
+&lt;th style="text-align:left">File&lt;/th>
+&lt;th style="text-align:left">Description&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td align="left">bookface&lt;/td>
-&lt;td align="left">the main binary&lt;/td>
+&lt;td style="text-align:left">bookface&lt;/td>
+&lt;td style="text-align:left">the main binary&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td align="left">bookface.c&lt;/td>
-&lt;td align="left">binary source code&lt;/td>
+&lt;td style="text-align:left">bookface.c&lt;/td>
+&lt;td style="text-align:left">binary source code&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td align="left">libc.so.6&lt;/td>
-&lt;td align="left">remote server libc&lt;/td>
+&lt;td style="text-align:left">libc.so.6&lt;/td>
+&lt;td style="text-align:left">remote server libc&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td align="left">Dockerfile&lt;/td>
-&lt;td align="left">Dockerfile used to build the remote challenge&lt;/td>
+&lt;td style="text-align:left">Dockerfile&lt;/td>
+&lt;td style="text-align:left">Dockerfile used to build the remote challenge&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td align="left">xinetd.conf&lt;/td>
-&lt;td align="left">xinetd config file to run the challenge&lt;/td>
+&lt;td style="text-align:left">xinetd.conf&lt;/td>
+&lt;td style="text-align:left">xinetd config file to run the challenge&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td align="left">server.sh&lt;/td>
-&lt;td align="left">the executable to be launched via xinetd which will run bookface&lt;/td>
+&lt;td style="text-align:left">server.sh&lt;/td>
+&lt;td style="text-align:left">the executable to be launched via xinetd which will run bookface&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -639,18 +639,18 @@ T&lt;span style="color:#f92672">.&lt;/span>interactive()
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th align="center">Event&lt;/th>
-&lt;th align="center">Challenge&lt;/th>
-&lt;th align="center">Category&lt;/th>
-&lt;th align="center">Points&lt;/th>
+&lt;th style="text-align:center">Event&lt;/th>
+&lt;th style="text-align:center">Challenge&lt;/th>
+&lt;th style="text-align:center">Category&lt;/th>
+&lt;th style="text-align:center">Points&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td align="center">CSAW CTF Final 2019&lt;/td>
-&lt;td align="center">defile&lt;/td>
-&lt;td align="center">PWN&lt;/td>
-&lt;td align="center">100&lt;/td>
+&lt;td style="text-align:center">CSAW CTF Final 2019&lt;/td>
+&lt;td style="text-align:center">defile&lt;/td>
+&lt;td style="text-align:center">PWN&lt;/td>
+&lt;td style="text-align:center">100&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -794,20 +794,20 @@ exploit()
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th align="center">Event&lt;/th>
-&lt;th align="center">Challenge&lt;/th>
-&lt;th align="center">Category&lt;/th>
-&lt;th align="center">Points&lt;/th>
-&lt;th align="center">Solves&lt;/th>
+&lt;th style="text-align:center">Event&lt;/th>
+&lt;th style="text-align:center">Challenge&lt;/th>
+&lt;th style="text-align:center">Category&lt;/th>
+&lt;th style="text-align:center">Points&lt;/th>
+&lt;th style="text-align:center">Solves&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td align="center">Securinets CTF Quals 2019&lt;/td>
-&lt;td align="center">Special Revenge&lt;/td>
-&lt;td align="center">PWN&lt;/td>
-&lt;td align="center">1000&lt;/td>
-&lt;td align="center">5&lt;/td>
+&lt;td style="text-align:center">Securinets CTF Quals 2019&lt;/td>
+&lt;td style="text-align:center">Special Revenge&lt;/td>
+&lt;td style="text-align:center">PWN&lt;/td>
+&lt;td style="text-align:center">1000&lt;/td>
+&lt;td style="text-align:center">5&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -928,20 +928,20 @@ securinets{bash_never_stop_from_being_awesome}
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th align="center">Event&lt;/th>
-&lt;th align="center">Challenge&lt;/th>
-&lt;th align="center">Category&lt;/th>
-&lt;th align="center">Points&lt;/th>
-&lt;th align="center">Solves&lt;/th>
+&lt;th style="text-align:center">Event&lt;/th>
+&lt;th style="text-align:center">Challenge&lt;/th>
+&lt;th style="text-align:center">Category&lt;/th>
+&lt;th style="text-align:center">Points&lt;/th>
+&lt;th style="text-align:center">Solves&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td align="center">Securinets CTF Quals 2019&lt;/td>
-&lt;td align="center">Stone Mining&lt;/td>
-&lt;td align="center">PWN&lt;/td>
-&lt;td align="center">1000&lt;/td>
-&lt;td align="center">4&lt;/td>
+&lt;td style="text-align:center">Securinets CTF Quals 2019&lt;/td>
+&lt;td style="text-align:center">Stone Mining&lt;/td>
+&lt;td style="text-align:center">PWN&lt;/td>
+&lt;td style="text-align:center">1000&lt;/td>
+&lt;td style="text-align:center">4&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -1056,18 +1056,18 @@ $
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th align="left">Event&lt;/th>
-&lt;th align="left">Challenge&lt;/th>
-&lt;th align="left">Category&lt;/th>
-&lt;th align="center">Points&lt;/th>
+&lt;th style="text-align:left">Event&lt;/th>
+&lt;th style="text-align:left">Challenge&lt;/th>
+&lt;th style="text-align:left">Category&lt;/th>
+&lt;th style="text-align:center">Points&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td align="left">Sharif CTF 8&lt;/td>
-&lt;td align="left">ElGamat&lt;/td>
-&lt;td align="left">Crypto&lt;/td>
-&lt;td align="center">200&lt;/td>
+&lt;td style="text-align:left">Sharif CTF 8&lt;/td>
+&lt;td style="text-align:left">ElGamat&lt;/td>
+&lt;td style="text-align:left">Crypto&lt;/td>
+&lt;td style="text-align:center">200&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
